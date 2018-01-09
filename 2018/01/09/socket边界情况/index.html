@@ -4,15 +4,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: PS3 | Thomas&#39;s blog</title>
+  <title>socket边界情况 | Thomas&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Thomas&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/PS3/index.html">
+  <meta name="description" content="socket编程中正常情况都是一样的，异常则是各种各样，研究的demo是经典的回射程序 1.回射程序服务端、客户端代码12345678910111213141516171819202122服务端:	int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);	struct sockaddr_in serv_addr;	memset(&amp;am">
+<meta name="keywords" content="网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="socket边界情况">
+<meta property="og:url" content="http://yoursite.com/2018/01/09/socket边界情况/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
+<meta property="og:description" content="socket编程中正常情况都是一样的，异常则是各种各样，研究的demo是经典的回射程序 1.回射程序服务端、客户端代码12345678910111213141516171819202122服务端:	int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);	struct sockaddr_in serv_addr;	memset(&amp;am">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-09T10:20:37.828Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Thomas&#39;s blog">
+<meta name="twitter:title" content="socket边界情况">
+<meta name="twitter:description" content="socket编程中正常情况都是一样的，异常则是各种各样，研究的demo是经典的回射程序 1.回射程序服务端、客户端代码12345678910111213141516171819202122服务端:	int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);	struct sockaddr_in serv_addr;	memset(&amp;am">
   
     <link rel="alternative" href="/atom.xml" title="Thomas&#39;s blog" type="application/atom+xml">
   
@@ -61,40 +66,76 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/09/09/testd1/" class="archive-article-date">
-  <time datetime="2016-09-09T14:22:01.000Z" itemprop="datePublished">9月 9</time>
+      <section id="main"><article id="post-socket边界情况" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/09/socket边界情况/" class="article-date">
+  <time datetime="2018-01-09T09:24:00.000Z" itemprop="datePublished">2018-01-09</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/09/testd1/">mysql-存储</a>
+    <h1 class="article-title" itemprop="name">
+      socket边界情况
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>socket编程中正常情况都是一样的，异常则是各种各样，研究的demo是经典的回射程序</p>
+<h3 id="1-回射程序服务端、客户端代码"><a href="#1-回射程序服务端、客户端代码" class="headerlink" title="1.回射程序服务端、客户端代码"></a>1.回射程序服务端、客户端代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">服务端:</div><div class="line">	int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);</div><div class="line"></div><div class="line">	struct sockaddr_in serv_addr;</div><div class="line">	memset(&amp;serv_addr, 0, sizeof(serv_addr));</div><div class="line">	serv_addr.sin_family = AF_INET;</div><div class="line">	serv_addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);</div><div class="line">	serv_addr.sin_port = htons(8888);</div><div class="line"></div><div class="line">	bind(listen_sock, (struct sockaddr *) &amp;serv_addr, sizeof(serv_addr));</div><div class="line"></div><div class="line">	listen(listen_sock, 20);</div><div class="line"></div><div class="line">	struct sockaddr_in conn_addr;</div><div class="line">	socklen_t conn_addr_size = sizeof(conn_addr);</div><div class="line">	int conn_sock = accept(listen_sock, (struct sockaddr *) &amp;conn_addr, &amp;conn_addr_size);</div><div class="line"></div><div class="line">	char str[] = &quot;hello world&quot;;</div><div class="line">	write(conn_sock, str, sizeof(str));</div><div class="line"></div><div class="line">	close(listen_sock);</div><div class="line">	close(conn_sock);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">客户端:</div><div class="line">	int conn_sock = socket(AF_INET, SOCK_STREAM, 0);</div><div class="line"></div><div class="line">	struct sockaddr_in serv_addr;</div><div class="line">	memset(&amp;serv_addr, 0, sizeof(serv_addr));</div><div class="line"></div><div class="line">	serv_addr.sin_family = AF_INET;</div><div class="line">	serv_addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);</div><div class="line">	serv_addr.sin_port = htons(8888);</div><div class="line"></div><div class="line">	connect(conn_sock, (struct sockaddr *) &amp;serv_addr, sizeof(serv_addr));</div><div class="line"></div><div class="line">	char buffer[40];</div><div class="line"></div><div class="line">	read(conn_sock, buffer, sizeof(buffer) - 1);</div><div class="line">	printf(&quot;message from server: %s \n&quot;, buffer);</div><div class="line">	close(conn_sock);</div></pre></td></tr></table></figure>
 
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2018/01/09/socket边界情况/" data-id="cjc7hfsfp0006doxhg9r948qk" class="article-share-link" data-share="baidu" data-title="socket边界情况">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2018/01/09/socket边界情况/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络编程/">网络编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/09/books/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          books
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/09/git-push/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">git push发生了什么</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2018/01/09/socket边界情况/" data-title="socket边界情况" data-url="http://yoursite.com/2018/01/09/socket边界情况/"></div>
+  </section>
 </section>
       
       <aside id="sidebar">
