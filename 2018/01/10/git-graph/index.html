@@ -4,15 +4,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017/9 | Thomas&#39;s blog</title>
+  <title>解读graph图 | Thomas&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Thomas&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2017/09/index.html">
+  <meta name="description" content="两人(devil, thomas)在一个分支(master)上开发，解读sourceTree的线图，如图img1  1.分支个数&amp;#8195;&amp;#8195;比如有这么一个场景：devil和thomas都在master分支下开发，这里就涉及到三个分支: origin master, devil’s local dev, thomas’s local dev 2.红框区域&amp;#8195;&amp;#8195;现">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解读graph图">
+<meta property="og:url" content="http://yoursite.com/2018/01/10/git-graph/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
+<meta property="og:description" content="两人(devil, thomas)在一个分支(master)上开发，解读sourceTree的线图，如图img1  1.分支个数&amp;#8195;&amp;#8195;比如有这么一个场景：devil和thomas都在master分支下开发，这里就涉及到三个分支: origin master, devil’s local dev, thomas’s local dev 2.红框区域&amp;#8195;&amp;#8195;现">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/sourceTree.png">
+<meta property="og:updated_time" content="2018-01-10T05:33:57.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Thomas&#39;s blog">
+<meta name="twitter:title" content="解读graph图">
+<meta name="twitter:description" content="两人(devil, thomas)在一个分支(master)上开发，解读sourceTree的线图，如图img1  1.分支个数&amp;#8195;&amp;#8195;比如有这么一个场景：devil和thomas都在master分支下开发，这里就涉及到三个分支: origin master, devil’s local dev, thomas’s local dev 2.红框区域&amp;#8195;&amp;#8195;现">
+<meta name="twitter:image" content="http://yoursite.com/img/sourceTree.png">
   
     <link rel="alternative" href="/atom.xml" title="Thomas&#39;s blog" type="application/atom+xml">
   
@@ -61,116 +68,86 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/09/09/article-title/" class="archive-article-date">
-  <time datetime="2017-09-09T14:58:25.000Z" itemprop="datePublished">9月 9</time>
+      <section id="main"><article id="post-git-graph" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/10/git-graph/" class="article-date">
+  <time datetime="2018-01-10T02:33:15.000Z" itemprop="datePublished">2018-01-10</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/article-title/">article title</a>
+    <h1 class="article-title" itemprop="name">
+      解读graph图
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/09/09/git基础/" class="archive-article-date">
-  <time datetime="2017-09-09T14:22:01.000Z" itemprop="datePublished">9月 9</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/git基础/">git基础</a>
-    </h1>
-  
+        <p>两人(devil, thomas)在一个分支(master)上开发，解读sourceTree的线图，如图img1</p>
+<p><img src="/img/sourceTree.png" alt="img1"></p>
+<h3 id="1-分支个数"><a href="#1-分支个数" class="headerlink" title="1.分支个数"></a>1.分支个数</h3><p>&#8195;&#8195;比如有这么一个场景：devil和thomas都在master分支下开发，这里就涉及到三个分支: origin master, devil’s local dev, thomas’s local dev</p>
+<h3 id="2-红框区域"><a href="#2-红框区域" class="headerlink" title="2.红框区域"></a>2.红框区域</h3><p>&#8195;&#8195;现在看的是历史记录，所以img1没有origin master指向某个确定的commit，不过，我们可以<b>推断:</b></p>
+<ul>
+<li><p>本地分支在merge origin master的时候，才能确定那个时刻origin master指向的是哪个commit，经过红框区域的推断: devil在3:38 做了一个merge origin master分支，这就表明origin master在3:38，指向的commit_id = d82ae67。</p>
+</li>
+<li><p>随着时间的推移，thomas在3:58之后，4:32之前，pull了一次origin master，而在thomas pull之前，devil push了一次自己本地的commit(9612063)到origin master，因为只有他push了，thomas才能pull到这个commit(9612063)。</p>
+</li>
+<li><p>接下来4:20 devil做了一次commit(537fdd5), 在并把这次commit push到orign, 此时devil本地和远程的分支都是指向这个commit的, 在4:32 thomas做了一次merge origin master。</p>
+</li>
+</ul>
+<h3 id="3-graph图"><a href="#3-graph图" class="headerlink" title="3.graph图"></a>3.graph图</h3><p>一个分支一条颜色的线, 这个说法大体上是正确的, 每个分支一条颜色的线，devil和thomas本地都有一个分支，他们在pull和push的时候，都是和origin master交互，所以，origin master不可能脱离二者的分支线的，假如是脱离了，那这个脱离的commit到底是谁提交的呢。当出现merge的时候有两种情况：</p>
+<ul>
+<li><p>一: 本地的commit大于origin的commit，且origin没有别人commit，这种情况在graph上看，只是origin master从这条线久commit移动到最新的commit;</p>
+</li>
+<li><p>二: origin master有别人的新commit，这个时候就会新出现一条线，连接本地分支最新的commit和origin最新的commit。eg: img1中连接537fdd5,7ac2bf0这两个commit的橘色的线。</p>
+</li>
+</ul>
+<h3 id="4-note"><a href="#4-note" class="headerlink" title="4.note"></a>4.note</h3><ul>
+<li>多人在一个分支开发这种做法很业余，而且还是在master，这里考虑的是主要矛盾，请忽略这些细节。</li>
+</ul>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/09/09/testd/" class="archive-article-date">
-  <time datetime="2017-09-09T14:22:01.000Z" itemprop="datePublished">9月 9</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/testd/">mysql-存储</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/09/09/testd2/" class="archive-article-date">
-  <time datetime="2017-09-09T14:22:01.000Z" itemprop="datePublished">9月 9</time>
-</a>
+    </div>
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/testd2/">mysql-存储1</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/09/09/hello-world/" class="archive-article-date">
-  <time datetime="2017-09-09T14:20:14.000Z" itemprop="datePublished">9月 9</time>
-</a>
+        <a data-url="http://yoursite.com/2018/01/10/git-graph/" data-id="cjc8msn7t0002oxxhtz2nunpp" class="article-share-link" data-share="baidu" data-title="解读graph图">分享到</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/hello-world/">Hello World</a>
-    </h1>
-  
 
-    </header>
+      
+        <a href="http://yoursite.com/2018/01/10/git-graph/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/01/09/books/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">books</div>
+    </a>
   
+</nav>
 
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2018/01/10/git-graph/" data-title="解读graph图" data-url="http://yoursite.com/2018/01/10/git-graph/"></div>
+  </section>
 </section>
       
       <aside id="sidebar">
