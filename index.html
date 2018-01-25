@@ -89,13 +89,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>* ## 二.设计思想</p>
-<h3 id="1-socket"><a href="#1-socket" class="headerlink" title="1.socket"></a>1.socket</h3><h3 id="2-进程间通信"><a href="#2-进程间通信" class="headerlink" title="2.进程间通信"></a>2.进程间通信</h3><h3 id="3-定时器"><a href="#3-定时器" class="headerlink" title="3.定时器"></a>3.定时器</h3>
+        <h2 id="一-总览"><a href="#一-总览" class="headerlink" title="一.总览"></a>一.总览</h2><p>webbench工程一共两个文件webbench.c, socket.c</p>
+<h3 id="1-webbench-c一共9个函数"><a href="#1-webbench-c一共9个函数" class="headerlink" title="1. webbench.c一共9个函数 "></a>1.<font color="blue"><b> webbench.c一共9个函数 </b></font></h3><h3 id="2-socket-c只有一个函数"><a href="#2-socket-c只有一个函数" class="headerlink" title="2. socket.c只有一个函数 "></a>2.<font color="blue"><b> socket.c只有一个函数 </b></font></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">int Socket(const char *host, int clientPort) &#123;</div><div class="line">    int sock; // 申请一个整形套接字变量</div><div class="line">    unsigned long inaddr;</div><div class="line">    struct sockaddr_in ad;</div><div class="line">    struct hostent *hp;</div><div class="line">    memset(&amp;ad, 0, sizeof(ad)); // 地址情况</div><div class="line">    ad.sin_family = AF_INET;    // 选择协议</div><div class="line"></div><div class="line">    inaddr = inet_addr(host);   // 将host转换成一个长整数型数</div><div class="line">    if (inaddr != INADDR_NONE)  // 当返回的不是INADDR_NONE,则host一个合格的ip</div><div class="line">        memcpy(&amp;ad.sin_addr, &amp;inaddr, sizeof(inaddr));</div><div class="line">    else &#123;                      // 否则host不是一个合格的ip,比如域名(www.baidu.com)</div><div class="line">        hp = gethostbyname(host);  // 解析主机</div><div class="line">        if (hp == NULL)</div><div class="line">            return -1;</div><div class="line">        memcpy(&amp;ad.sin_addr, hp-&gt;h_addr, hp-&gt;h_length);</div><div class="line">    &#125;</div><div class="line">    ad.sin_port = htons(clientPort); // 主机字节序转化成网络字节序 note1</div><div class="line">    sock = socket(AF_INET, SOCK_STREAM, 0); // </div><div class="line">    if (sock &lt; 0)</div><div class="line">        return sock;</div><div class="line">    if (connect(sock, (struct sockaddr *) &amp;ad, sizeof(ad)) &lt; 0)    // 创建连接</div><div class="line">        return -1;</div><div class="line">    return sock;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>创建socket主动套接字, 并返回, 其他的处理全部在webbench.c文件中<br>htons的作用, 因为网络字节序，</p>
+<h2 id="二-设计思想"><a href="#二-设计思想" class="headerlink" title="二.设计思想"></a>二.设计思想</h2><h3 id="1-socket"><a href="#1-socket" class="headerlink" title="1.socket"></a>1.socket</h3><h3 id="2-进程间通信"><a href="#2-进程间通信" class="headerlink" title="2.进程间通信"></a>2.进程间通信</h3><h3 id="3-定时器"><a href="#3-定时器" class="headerlink" title="3.定时器"></a>3.定时器</h3>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/24/webbench源码分析(二)/" data-id="cjctsyeu2000qr4xhai9xy7b4" class="article-share-link" data-share="baidu" data-title="webbench源码分析(二)">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/24/webbench源码分析(二)/" data-id="cjct8ppgj000oo5xhvwf20nml" class="article-share-link" data-share="baidu" data-title="webbench源码分析(二)">分享到</a>
       
 
       
@@ -143,7 +145,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/11/提利尔及家族/" data-id="cjctsyeub0016r4xhiu3ccnbh" class="article-share-link" data-share="baidu" data-title="提利尔及家族(玫瑰)">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/11/提利尔及家族/" data-id="cjct8ppgr0015o5xh1vvdr74g" class="article-share-link" data-share="baidu" data-title="提利尔及家族(玫瑰)">分享到</a>
       
 
       
@@ -189,7 +191,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/11/徒利家族/" data-id="cjctsyeu90011r4xh9ncaobvp" class="article-share-link" data-share="baidu" data-title="徒利家族(鱼)">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/11/徒利家族/" data-id="cjct8ppgo0010o5xhlzn96kdy" class="article-share-link" data-share="baidu" data-title="徒利家族(鱼)">分享到</a>
       
 
       
@@ -235,7 +237,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/11/葛雷乔伊家族/" data-id="cjctsyeue001br4xh5dx0uskr" class="article-share-link" data-share="baidu" data-title="葛雷乔伊家族(海怪)">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/11/葛雷乔伊家族/" data-id="cjct8ppgs0016o5xh8kk8sbli" class="article-share-link" data-share="baidu" data-title="葛雷乔伊家族(海怪)">分享到</a>
       
 
       
