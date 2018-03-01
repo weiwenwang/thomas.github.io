@@ -63,63 +63,6 @@
     <div class="outer">
       <section id="main">
   
-    <article id="post-webbench源码分析(一)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/03/webbench源码分析(一)/" class="article-date">
-  <time datetime="2018-01-03T15:09:18.000Z" itemprop="datePublished">2018-01-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/源码阅读/">源码阅读</a>►<a class="article-category-link" href="/categories/源码阅读/webbench/">webbench</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/03/webbench源码分析(一)/">webbench源码分析(一)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-简介"><a href="#一-简介" class="headerlink" title="一. 简介"></a>一. 简介</h2><p>&#8195;&#8195;webbench通过fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果。</p>
-<p><a href="https://baike.baidu.com/item/webbench/9847648" target="_blank" rel="external">百度百科</a><br><a href="https://baike.baidu.com/item/webbench/9847648" target="_blank" rel="external">github.com</a></p>
-<h2 id="二-安装"><a href="#二-安装" class="headerlink" title="二.安装"></a>二.安装</h2><p>centos为例:</p>
-<p>wget <a href="http://blog.s135.com/soft/linux/webbench/webbench-1.5.tar.gz" target="_blank" rel="external">http://blog.s135.com/soft/linux/webbench/webbench-1.5.tar.gz</a><br>tar zxvf webbench-1.5.tar.gz<br>cd webbench-1.5<br>make &amp;&amp; make install</p>
-<h2 id="三-使用方法"><a href="#三-使用方法" class="headerlink" title="三.使用方法"></a>三.使用方法</h2><p><b>5个并发(线程), 一直请求百度首页, 持续时间10s</b></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ webbench -t 10 -c 5 http://www.baidu.com/</div><div class="line"></div><div class="line">Webbench - Simple Web Benchmark 1.5</div><div class="line">Copyright (c) Radim Kolar 1997-2004, GPL Open Source Software.</div><div class="line"></div><div class="line">Request:</div><div class="line">GET / HTTP/1.0</div><div class="line">User-Agent: WebBench 1.5</div><div class="line">Host: www.baidu.com</div><div class="line"></div><div class="line"></div><div class="line">Runing info: 5 clients, running 10 sec.</div><div class="line"></div><div class="line">Speed=552 pages/min, 1080153 bytes/sec.</div><div class="line">Requests: 92 susceed, 0 failed.</div><div class="line">$</div></pre></td></tr></table></figure>
-<p>压测结果:<br>&#8195;&#8195;每分钟可以请求552次，每秒钟传输1080153字节(这两个数据是根据本次压测结果推算得出的),10秒内请求成功92次，失败0次</p>
-<h2 id="四-实现原理"><a href="#四-实现原理" class="headerlink" title="四.实现原理"></a>四.实现原理</h2><p>&#8195;&#8195;当程序启动的时候，程序首先解析用户传过来的参数，比如 <font color="red"><b>-c </b></font>这个就是并发数, 用来决定创建的线程数, 并发数等于子线程数, 在每个子线程刚开始均会设置一个定时器(时长根据<font color="red"><b> -t </b></font>), 子进程循环请求目标url，然后接收返回数据，每次请求的结果情况，要通过管道发送给父进程，    到点后，子进程都退出，父进程检查到子进程都退出了，也跳出循环，计算一下数据，显示给用户。</p>
-<p>详情, 请看接下来的源码分析…</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/01/03/webbench源码分析(一)/" data-id="cje8mi1vp0010dtxheurjhbzx" class="article-share-link" data-share="baidu" data-title="webbench源码分析(一)">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2018/01/03/webbench源码分析(一)/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webbench/">webbench</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-article-title" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/09/article-title/" class="article-date">
@@ -147,11 +90,54 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/09/09/article-title/" data-id="cje8mi1uz0000dtxh15hw2jfp" class="article-share-link" data-share="baidu" data-title="article title">分享到</a>
+        <a data-url="http://yoursite.com/2017/09/09/article-title/" data-id="cje8nni5e0000guxh91q090e9" class="article-share-link" data-share="baidu" data-title="article title">分享到</a>
       
 
       
         <a href="http://yoursite.com/2017/09/09/article-title/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-testd2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/09/testd2/" class="article-date">
+  <time datetime="2017-09-09T14:22:01.000Z" itemprop="datePublished">2017-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/09/testd2/">mysql-存储1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h2><p>upgrade</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2017/09/09/testd2/" data-id="cje8nni5y000uguxhr7aghmdz" class="article-share-link" data-share="baidu" data-title="mysql-存储1">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2017/09/09/testd2/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -190,7 +176,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/09/09/testd/" data-id="cje8mi1vl000qdtxhgfimdu92" class="article-share-link" data-share="baidu" data-title="mysql-存储">分享到</a>
+        <a data-url="http://yoursite.com/2017/09/09/testd/" data-id="cje8nni5v000oguxh51glcze9" class="article-share-link" data-share="baidu" data-title="mysql-存储">分享到</a>
       
 
       
@@ -243,7 +229,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/09/09/git基础/" data-id="cje8mi1vd000bdtxht70v6lhu" class="article-share-link" data-share="baidu" data-title="git基础">分享到</a>
+        <a data-url="http://yoursite.com/2017/09/09/git基础/" data-id="cje8nni5p000bguxheyn4sh4x" class="article-share-link" data-share="baidu" data-title="git基础">分享到</a>
       
 
       
@@ -273,7 +259,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/goLang/">goLang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movies/">movies</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/movies/权利的游戏/">权利的游戏</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/">我的作品</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/web-bench/">web-bench</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/">源码阅读</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/webbench/">webbench</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/goLang/">goLang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movies/">movies</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/movies/权利的游戏/">权利的游戏</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/">我的作品</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/web-bench/">web-bench</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/">源码阅读</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/webbench/">webbench</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -282,7 +268,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Games/">Games</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS3/">PS3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/">book</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/min-bench/">min-bench</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/movie/">movie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbench/">webbench</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络编程/">网络编程</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Games/">Games</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS3/">PS3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/">book</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/min-bench/">min-bench</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/movie/">movie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/times33/">times33</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbench/">webbench</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络编程/">网络编程</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -291,7 +277,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Games/" style="font-size: 10px;">Games</a> <a href="/tags/PS3/" style="font-size: 10px;">PS3</a> <a href="/tags/book/" style="font-size: 10px;">book</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/min-bench/" style="font-size: 10px;">min-bench</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/webbench/" style="font-size: 15px;">webbench</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a>
+      <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Games/" style="font-size: 10px;">Games</a> <a href="/tags/PS3/" style="font-size: 10px;">PS3</a> <a href="/tags/book/" style="font-size: 10px;">book</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/min-bench/" style="font-size: 10px;">min-bench</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/times33/" style="font-size: 10px;">times33</a> <a href="/tags/webbench/" style="font-size: 15px;">webbench</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a>
     </div>
   </div>
 
@@ -300,7 +286,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -310,10 +296,6 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2018/03/01/times33/">times33</a>
-          </li>
         
           <li>
             <a href="/2018/03/01/GO并发机制/">GO并发机制</a>
@@ -329,6 +311,10 @@
         
           <li>
             <a href="/2018/01/11/提利尔及家族/">提利尔及家族(玫瑰)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/11/徒利家族/">徒利家族(鱼)</a>
           </li>
         
       </ul>
