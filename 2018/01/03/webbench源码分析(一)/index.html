@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Thomas&#39;s blog">
 <meta property="og:description" content="一. 简介&amp;#8195;&amp;#8195;webbench通过fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果。 百度百科github.com 二.安装centos为例: wget http://blog.s135.com/soft/linux/webbench/webbench-1.5.tar.gztar zxvf webben">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-25T01:01:47.615Z">
+<meta property="og:updated_time" content="2018-03-01T15:43:40.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webbench源码分析(一)">
 <meta name="twitter:description" content="一. 简介&amp;#8195;&amp;#8195;webbench通过fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果。 百度百科github.com 二.安装centos为例: wget http://blog.s135.com/soft/linux/webbench/webbench-1.5.tar.gztar zxvf webben">
@@ -31,10 +31,13 @@
 <body>
 <div id="container">
   <div id="wrap">
-    <header id="header" style="height:80px;">
+    <header id="header" style="height:100px;">
   <div id="banner"></div>
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
+      <!-- <h1 id="logo-wrap">
+        <a href="/" id="logo">1Thomas&#39;s blog</a>
+      </h1> -->
       
     </div>
     <div id="header-inner" class="inner">
@@ -65,6 +68,7 @@
     </div>
   </div>
 </header>
+
     <div class="outer">
       <section id="main"><article id="post-webbench源码分析(一)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -97,7 +101,7 @@
 <h2 id="二-安装"><a href="#二-安装" class="headerlink" title="二.安装"></a>二.安装</h2><p>centos为例:</p>
 <p>wget <a href="http://blog.s135.com/soft/linux/webbench/webbench-1.5.tar.gz" target="_blank" rel="external">http://blog.s135.com/soft/linux/webbench/webbench-1.5.tar.gz</a><br>tar zxvf webbench-1.5.tar.gz<br>cd webbench-1.5<br>make &amp;&amp; make install</p>
 <h2 id="三-使用方法"><a href="#三-使用方法" class="headerlink" title="三.使用方法"></a>三.使用方法</h2><p><b>5个并发(线程), 一直请求百度首页, 持续时间10s</b></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ webbench -t 10 -c 5 http://www.baidu.com/</div><div class="line"></div><div class="line">Webbench - Simple Web Benchmark 1.5</div><div class="line">Copyright (c) Radim Kolar 1997-2004, GPL Open Source Software.</div><div class="line"></div><div class="line">Request:</div><div class="line">GET / HTTP/1.0</div><div class="line">User-Agent: WebBench 1.5</div><div class="line">Host: www.baidu.com</div><div class="line"></div><div class="line"></div><div class="line">Runing info: 5 clients, running 10 sec.</div><div class="line"></div><div class="line">Speed=552 pages/min, 1080153 bytes/sec.</div><div class="line">Requests: 92 susceed, 0 failed.</div><div class="line">$</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ webbench -t <span class="number">10</span> -c <span class="number">5</span> http:<span class="comment">//www.baidu.com/</span></div><div class="line"></div><div class="line">Webbench - Simple Web Benchmark <span class="number">1.5</span></div><div class="line">Copyright (c) Radim Kolar <span class="number">1997</span><span class="number">-2004</span>, GPL Open Source Software.</div><div class="line"></div><div class="line">Request:</div><div class="line">GET / HTTP/<span class="number">1.0</span></div><div class="line">User-Agent: WebBench <span class="number">1.5</span></div><div class="line">Host: www.baidu.com</div><div class="line"></div><div class="line"></div><div class="line">Runing info: <span class="number">5</span> clients, running <span class="number">10</span> sec.</div><div class="line"></div><div class="line">Speed=<span class="number">552</span> pages/min, <span class="number">1080153</span> bytes/sec.</div><div class="line">Requests: <span class="number">92</span> susceed, <span class="number">0</span> failed.</div><div class="line">$</div></pre></td></tr></table></figure>
 <p>压测结果:<br>&#8195;&#8195;每分钟可以请求552次，每秒钟传输1080153字节(这两个数据是根据本次压测结果推算得出的),10秒内请求成功92次，失败0次</p>
 <h2 id="四-实现原理"><a href="#四-实现原理" class="headerlink" title="四.实现原理"></a>四.实现原理</h2><p>&#8195;&#8195;当程序启动的时候，程序首先解析用户传过来的参数，比如 <font color="red"><b>-c </b></font>这个就是并发数, 用来决定创建的线程数, 并发数等于子线程数, 在每个子线程刚开始均会设置一个定时器(时长根据<font color="red"><b> -t </b></font>), 子进程循环请求目标url，然后接收返回数据，每次请求的结果情况，要通过管道发送给父进程，    到点后，子进程都退出，父进程检查到子进程都退出了，也跳出循环，计算一下数据，显示给用户。</p>
 <p>详情, 请看接下来的源码分析…</p>
@@ -106,7 +110,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/03/webbench源码分析(一)/" data-id="cje8nni600010guxhlk2tqi6u" class="article-share-link" data-share="baidu" data-title="webbench源码分析(一)">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/03/webbench源码分析(一)/" data-id="cje8mi1vp0010dtxheurjhbzx" class="article-share-link" data-share="baidu" data-title="webbench源码分析(一)">分享到</a>
       
 
       

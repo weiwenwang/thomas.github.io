@@ -26,10 +26,13 @@
 <body>
 <div id="container">
   <div id="wrap">
-    <header id="header" style="height:80px;">
+    <header id="header" style="height:100px;">
   <div id="banner"></div>
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
+      <!-- <h1 id="logo-wrap">
+        <a href="/" id="logo">1Thomas&#39;s blog</a>
+      </h1> -->
       
     </div>
     <div id="header-inner" class="inner">
@@ -60,6 +63,7 @@
     </div>
   </div>
 </header>
+
     <div class="outer">
       <section id="main">
   
@@ -99,7 +103,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/09/09/hello-world/" data-id="cje8nni5n0006guxhsgaq8w3e" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
+        <a data-url="http://yoursite.com/2017/09/09/hello-world/" data-id="cje8mi1vb0007dtxhod6ob83k" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
       
 
       
@@ -141,7 +145,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>我也来写一下times33, 据说这个算法是字符串最好的哈希算法</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int times33(char *key, int key_len) &#123;</div><div class="line">  int hash = 5381; // 借鉴php源码里选用5381作为hash值的基数</div><div class="line">  for(int i = 0; i &lt; key_len; i++) &#123;</div><div class="line">    hash = ((hash &lt;&lt; 5) + hash) + *key++;</div><div class="line">  &#125;</div><div class="line">  return hash;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line">  char name[] = &quot;abcdefg&quot;;</div><div class="line">  int hash = times33(name, strlen(name));</div><div class="line">  int rand = 10000;</div><div class="line">  printf(&quot;%d\n&quot;, hash &amp; rand);</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">times33</span><span class="params">(<span class="keyword">char</span> *key, <span class="keyword">int</span> key_len)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> hash = <span class="number">5381</span>; <span class="comment">// 借鉴php源码里选用5381作为hash值的基数</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; key_len; i++) &#123;</div><div class="line">    hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *key++;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> hash;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> name[] = <span class="string">"abcdefg"</span>;</div><div class="line">  <span class="keyword">int</span> hash = times33(name, <span class="built_in">strlen</span>(name));</div><div class="line">  <span class="keyword">int</span> rand = <span class="number">10000</span>;</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, hash &amp; rand);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>对一个基数乘以33, 乘完之后的结果加上要加密的字符串的最末尾, 得到的值作为新的基数,<br>然后是对字符串的倒数第二位, 这样周而复始, 直到字符串结束</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>通过times33对字符串计算得到的结果是一个很大的数字，我们一般要把这个大值, 映射到一个具体的范围(x), 这就需要与x取与</p>
 
@@ -149,7 +153,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/04/01/times33/" data-id="cje8nni5s000iguxhp6bqe88w" class="article-share-link" data-share="baidu" data-title="php hash算法times33">分享到</a>
+        <a data-url="http://yoursite.com/2017/04/01/times33/" data-id="cje8mi1vi000jdtxhc8dz22nw" class="article-share-link" data-share="baidu" data-title="php hash算法times33">分享到</a>
       
 
       
@@ -197,7 +201,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/11/马泰尔家族/" data-id="cje8nni6t002hguxhnth0ne36" class="article-share-link" data-share="baidu" data-title="马泰尔家族(太阳)">分享到</a>
+        <a data-url="http://yoursite.com/2017/01/11/马泰尔家族/" data-id="cje8mi1vz001idtxhkqmx6016" class="article-share-link" data-share="baidu" data-title="马泰尔家族(太阳)">分享到</a>
       
 
       
@@ -239,7 +243,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/09/09/testd1/" data-id="cje8nni5r000gguxhm3nitj2a" class="article-share-link" data-share="baidu" data-title="mysql-存储">分享到</a>
+        <a data-url="http://yoursite.com/2016/09/09/testd1/" data-id="cje8mi1vk000ndtxhplcv8w5a" class="article-share-link" data-share="baidu" data-title="mysql-存储">分享到</a>
       
 
       
