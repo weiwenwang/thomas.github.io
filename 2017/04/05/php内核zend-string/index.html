@@ -6,18 +6,18 @@
   
   <title>php内核zend_string | Thomas&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简单的代码，表达PHP内核是如何处理字符串的 1234567891011121314151617181920212223242526272829303132// 字符串结构体struct _zend_string &amp;#123;  int gc;  int hash;  int len;  char val[1];&amp;#125;;typedef struct _zend_string zend_str">
+  <meta name="description" content="额… ,我用简单的代码，表达PHP内核是如何处理字符串的 1234567891011121314151617181920212223242526272829303132// 字符串结构体struct _zend_string &amp;#123;  int gc;  int hash;  int len;  char val[1];&amp;#125;;typedef struct _zend_string ze">
 <meta name="keywords" content="zend_string">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php内核zend_string">
 <meta property="og:url" content="http://yoursite.com/2017/04/05/php内核zend-string/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
-<meta property="og:description" content="简单的代码，表达PHP内核是如何处理字符串的 1234567891011121314151617181920212223242526272829303132// 字符串结构体struct _zend_string &amp;#123;  int gc;  int hash;  int len;  char val[1];&amp;#125;;typedef struct _zend_string zend_str">
+<meta property="og:description" content="额… ,我用简单的代码，表达PHP内核是如何处理字符串的 1234567891011121314151617181920212223242526272829303132// 字符串结构体struct _zend_string &amp;#123;  int gc;  int hash;  int len;  char val[1];&amp;#125;;typedef struct _zend_string ze">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-02T02:05:57.176Z">
+<meta property="og:updated_time" content="2018-03-02T02:08:14.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php内核zend_string">
-<meta name="twitter:description" content="简单的代码，表达PHP内核是如何处理字符串的 1234567891011121314151617181920212223242526272829303132// 字符串结构体struct _zend_string &amp;#123;  int gc;  int hash;  int len;  char val[1];&amp;#125;;typedef struct _zend_string zend_str">
+<meta name="twitter:description" content="额… ,我用简单的代码，表达PHP内核是如何处理字符串的 1234567891011121314151617181920212223242526272829303132// 字符串结构体struct _zend_string &amp;#123;  int gc;  int hash;  int len;  char val[1];&amp;#125;;typedef struct _zend_string ze">
   
     <link rel="alternative" href="/atom.xml" title="Thomas&#39;s blog" type="application/atom+xml">
   
@@ -96,7 +96,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>简单的代码，表达PHP内核是如何处理字符串的</p>
+        <p>额… ,我用简单的代码，表达PHP内核是如何处理字符串的</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 字符串结构体</span></div><div class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">zend_string</span> &#123;</span></div><div class="line">  <span class="keyword">int</span> gc;</div><div class="line">  <span class="keyword">int</span> hash;</div><div class="line">  <span class="keyword">int</span> len;</div><div class="line">  <span class="keyword">char</span> val[<span class="number">1</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">zend_string</span> <span class="title">zend_string</span>;</span></div><div class="line"></div><div class="line"><span class="comment">// php内核采用的hash算法</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">times33</span><span class="params">(<span class="keyword">char</span> *key, <span class="keyword">int</span> key_len)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> hash = <span class="number">5381</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; key_len; i++) &#123;</div><div class="line">    hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *key++;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> hash;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 初始化字符串的方法</span></div><div class="line"><span class="function">zend_string *<span class="title">initString</span><span class="params">(<span class="keyword">char</span> *<span class="built_in">string</span>, <span class="keyword">int</span> *len)</span> </span>&#123;</div><div class="line">  zend_string * zs = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(zend_string) + *len);</div><div class="line">  zs-&gt;gc = <span class="number">1</span>;</div><div class="line">  zs-&gt;hash = times33(<span class="built_in">string</span>, *len);</div><div class="line">  zs-&gt;len = *len;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; *len; i++) &#123;</div><div class="line">    zs-&gt;val[i] = <span class="built_in">string</span>[i];</div><div class="line">  &#125;</div><div class="line">  zs-&gt;val[*len] = <span class="string">'\0'</span>;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> zs;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>struct _zend_string这个结构体,包含三个变量,分别介绍:</p>
 <blockquote>
@@ -108,7 +108,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/04/05/php内核zend-string/" data-id="cje9a1qul000botxhdozjqxr8" class="article-share-link" data-share="baidu" data-title="php内核zend_string">分享到</a>
+        <a data-url="http://yoursite.com/2017/04/05/php内核zend-string/" data-id="cje9auutf000k73xhn8ger1mf" class="article-share-link" data-share="baidu" data-title="php内核zend_string">分享到</a>
       
 
       
