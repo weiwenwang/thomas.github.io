@@ -4,15 +4,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Thomas&#39;s blog</title>
+  <title>php内核HashTable | Thomas&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Thomas&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="玩具代码, 拉链法解决HashTable冲突 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677#include &amp;lt;stdio.h&amp;gt;#include">
+<meta name="keywords" content="hashtable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php内核HashTable">
+<meta property="og:url" content="http://yoursite.com/2018/03/06/php内核HashTable/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
+<meta property="og:description" content="玩具代码, 拉链法解决HashTable冲突 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677#include &amp;lt;stdio.h&amp;gt;#include">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-06T15:08:16.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Thomas&#39;s blog">
+<meta name="twitter:title" content="php内核HashTable">
+<meta name="twitter:description" content="玩具代码, 拉链法解决HashTable冲突 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677#include &amp;lt;stdio.h&amp;gt;#include">
   
     <link rel="alternative" href="/atom.xml" title="Thomas&#39;s blog" type="application/atom+xml">
   
@@ -65,9 +70,7 @@
 </header>
 
     <div class="outer">
-      <section id="main">
-  
-    <article id="post-php内核HashTable" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-php内核HashTable" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/06/php内核HashTable/" class="article-date">
   <time datetime="2018-03-06T15:03:45.000Z" itemprop="datePublished">2018-03-06</time>
@@ -84,8 +87,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/php内核HashTable/">php内核HashTable</a>
+    <h1 class="article-title" itemprop="name">
+      php内核HashTable
     </h1>
   
 
@@ -113,166 +116,24 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-GO并发机制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/01/GO并发机制/" class="article-date">
-  <time datetime="2018-02-28T23:59:55.000Z" itemprop="datePublished">2018-03-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/goLang/">goLang</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/01/GO并发机制/">GO并发机制</a>
-    </h1>
+    <a href="/2018/03/01/GO并发机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">GO并发机制</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>GoLang在操作系统提供的内核线程上，搭建了自己的两级线程模型，叫goroutine，它不同于线程，进程，协程。 GoLang不推荐共享内存的方式传递数据，我们都知道在进程间通信的几种方式中，共享内存的方式是最高效的，这里不推荐主要是从编程的复杂度来考虑的，就像陈硕的他的mudo网络库里面提到的，进程间通信，他推荐用socket方式，原因雷同，考虑的编程方便和日后的扩展，效率损失其实可以忽略不计的</p>
-<h3 id="一-GO线程模型的实现"><a href="#一-GO线程模型的实现" class="headerlink" title="一.GO线程模型的实现"></a>一.GO线程模型的实现</h3><p>goroutine可以看做GoLang应用层线程，实现主要有3个核心元素</p>
-<p>M: 一个M代表一个内核线程<br>P: 一个P代表一个Go代码片段所需要的资源<br>G: 一个G代表一个Go代码片段</p>
-<p><img src="https://i.loli.net/2018/03/01/5a9747426acf9.png" alt="GoLang线程实现模型"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/03/01/GO并发机制/" data-id="cjefsc2ln00001hxh1wp8l2gr" class="article-share-link" data-share="baidu" data-title="GO并发机制">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2018/03/01/GO并发机制/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GO/">GO</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-  
-    <article id="post-min-bench" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/25/min-bench/" class="article-date">
-  <time datetime="2018-01-25T11:17:10.000Z" itemprop="datePublished">2018-01-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/我的作品/">我的作品</a>►<a class="article-category-link" href="/categories/我的作品/web-bench/">web-bench</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/25/min-bench/">min-bench</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/01/25/min-bench/" data-id="cjefsc2ma000w1hxhkxl23k31" class="article-share-link" data-share="baidu" data-title="min-bench">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2018/01/25/min-bench/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/min-bench/">min-bench</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-webbench源码分析(二)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/24/webbench源码分析(二)/" class="article-date">
-  <time datetime="2018-01-24T15:43:51.000Z" itemprop="datePublished">2018-01-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/源码阅读/">源码阅读</a>►<a class="article-category-link" href="/categories/源码阅读/webbench/">webbench</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/webbench源码分析(二)/">webbench源码分析(二)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-总览"><a href="#一-总览" class="headerlink" title="一.总览"></a>一.总览</h2><p>webbench工程一共两个文件webbench.c, socket.c</p>
-<h3 id="1-webbench-c一共9个函数"><a href="#1-webbench-c一共9个函数" class="headerlink" title="1. webbench.c一共9个函数 "></a>1.<font color="blue"><b> webbench.c一共9个函数 </b></font></h3><h3 id="2-socket-c只有一个函数"><a href="#2-socket-c只有一个函数" class="headerlink" title="2. socket.c只有一个函数 "></a>2.<font color="blue"><b> socket.c只有一个函数 </b></font></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Socket</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *host, <span class="keyword">int</span> clientPort)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> sock; <span class="comment">// 申请一个整形套接字变量</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> inaddr;</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">ad</span>;</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hostent</span> *<span class="title">hp</span>;</span></div><div class="line">    <span class="built_in">memset</span>(&amp;ad, <span class="number">0</span>, <span class="keyword">sizeof</span>(ad)); <span class="comment">// 地址情况</span></div><div class="line">    ad.sin_family = AF_INET;    <span class="comment">// 选择协议</span></div><div class="line"></div><div class="line">    inaddr = inet_addr(host);   <span class="comment">// 将host转换成一个长整数型数</span></div><div class="line">    <span class="keyword">if</span> (inaddr != INADDR_NONE)  <span class="comment">// 当返回的不是INADDR_NONE,则host一个合格的ip</span></div><div class="line">        <span class="built_in">memcpy</span>(&amp;ad.sin_addr, &amp;inaddr, <span class="keyword">sizeof</span>(inaddr));</div><div class="line">    <span class="keyword">else</span> &#123;                      <span class="comment">// 否则host不是一个合格的ip,比如域名(www.baidu.com)</span></div><div class="line">        hp = gethostbyname(host);  <span class="comment">// 解析主机</span></div><div class="line">        <span class="keyword">if</span> (hp == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">        <span class="built_in">memcpy</span>(&amp;ad.sin_addr, hp-&gt;h_addr, hp-&gt;h_length);</div><div class="line">    &#125;</div><div class="line">    ad.sin_port = htons(clientPort); <span class="comment">// 主机字节序转化成网络字节序 note1</span></div><div class="line">    sock = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>); <span class="comment">//</span></div><div class="line">    <span class="keyword">if</span> (sock &lt; <span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> sock;</div><div class="line">    <span class="keyword">if</span> (connect(sock, (struct sockaddr *) &amp;ad, <span class="keyword">sizeof</span>(ad)) &lt; <span class="number">0</span>)    <span class="comment">// 创建连接</span></div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    <span class="keyword">return</span> sock;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>创建socket主动套接字, 并返回, 其他的处理全部在webbench.c文件中<br>htons的作用, 因为网络字节序，</p>
-<h2 id="二-设计思想"><a href="#二-设计思想" class="headerlink" title="二.设计思想"></a>二.设计思想</h2><h3 id="1-socket"><a href="#1-socket" class="headerlink" title="1.socket"></a>1.socket</h3><h3 id="2-进程间通信"><a href="#2-进程间通信" class="headerlink" title="2.进程间通信"></a>2.进程间通信</h3><h3 id="3-定时器"><a href="#3-定时器" class="headerlink" title="3.定时器"></a>3.定时器</h3>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/01/24/webbench源码分析(二)/" data-id="cjefsc2mg00181hxhg9cl8n4r" class="article-share-link" data-share="baidu" data-title="webbench源码分析(二)">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2018/01/24/webbench源码分析(二)/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webbench/">webbench</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
-  </nav>
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2018/03/06/php内核HashTable/" data-title="php内核HashTable" data-url="http://yoursite.com/2018/03/06/php内核HashTable/"></div>
+  </section>
 </section>
       
       <aside id="sidebar">
