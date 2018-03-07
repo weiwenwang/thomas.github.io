@@ -67,6 +67,116 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-socket边界情况" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/09/socket边界情况/" class="article-date">
+  <time datetime="2018-01-09T09:24:00.000Z" itemprop="datePublished">2018-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络编程/">网络编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/09/socket边界情况/">socket边界情况</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>socket编程中正常情况都是一样的，异常则是各种各样，研究的demo是经典的回射程序</p>
+<h3 id="1-回射程序服务端、客户端代码"><a href="#1-回射程序服务端、客户端代码" class="headerlink" title="1.回射程序服务端、客户端代码"></a>1.回射程序服务端、客户端代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">服务端:</div><div class="line">	int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);</div><div class="line"></div><div class="line">	struct sockaddr_in serv_addr;</div><div class="line">	memset(&amp;serv_addr, 0, sizeof(serv_addr));</div><div class="line">	serv_addr.sin_family = AF_INET;</div><div class="line">	serv_addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);</div><div class="line">	serv_addr.sin_port = htons(8888);</div><div class="line"></div><div class="line">	bind(listen_sock, (struct sockaddr *) &amp;serv_addr, sizeof(serv_addr));</div><div class="line"></div><div class="line">	listen(listen_sock, 20);</div><div class="line"></div><div class="line">	struct sockaddr_in conn_addr;</div><div class="line">	socklen_t conn_addr_size = sizeof(conn_addr);</div><div class="line">	int conn_sock = accept(listen_sock, (struct sockaddr *) &amp;conn_addr, &amp;conn_addr_size);</div><div class="line"></div><div class="line">	char str[] = &quot;hello world&quot;;</div><div class="line">	write(conn_sock, str, sizeof(str));</div><div class="line"></div><div class="line">	close(listen_sock);</div><div class="line">	close(conn_sock);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">客户端:</div><div class="line">	int conn_sock = socket(AF_INET, SOCK_STREAM, 0);</div><div class="line"></div><div class="line">	struct sockaddr_in serv_addr;</div><div class="line">	memset(&amp;serv_addr, 0, sizeof(serv_addr));</div><div class="line"></div><div class="line">	serv_addr.sin_family = AF_INET;</div><div class="line">	serv_addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);</div><div class="line">	serv_addr.sin_port = htons(8888);</div><div class="line"></div><div class="line">	connect(conn_sock, (struct sockaddr *) &amp;serv_addr, sizeof(serv_addr));</div><div class="line"></div><div class="line">	char buffer[40];</div><div class="line"></div><div class="line">	read(conn_sock, buffer, sizeof(buffer) - 1);</div><div class="line">	printf(&quot;message from server: %s \n&quot;, buffer);</div><div class="line">	close(conn_sock);</div></pre></td></tr></table></figure>
+<h3 id="客户和服务端启动的时候"><a href="#客户和服务端启动的时候" class="headerlink" title="客户和服务端启动的时候"></a>客户和服务端启动的时候</h3><h3 id="客户正常终止"><a href="#客户正常终止" class="headerlink" title="客户正常终止"></a>客户正常终止</h3><h3 id="服务端先与客户端终止"><a href="#服务端先与客户端终止" class="headerlink" title="服务端先与客户端终止"></a>服务端先与客户端终止</h3><h3 id="服务主机崩溃"><a href="#服务主机崩溃" class="headerlink" title="服务主机崩溃"></a>服务主机崩溃</h3>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2018/01/09/socket边界情况/" data-id="cjeh60nf6000uwbxhhafa6f7v" class="article-share-link" data-share="baidu" data-title="socket边界情况">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2018/01/09/socket边界情况/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络编程/">网络编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="git-git-push" class="article article-type-git" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/09/git-push/" class="article-date">
+  <time datetime="2018-01-08T23:57:23.000Z" itemprop="datePublished">2018-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/09/git-push/">git push发生了什么</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&#8195;&#8195;多人在一个分支开发的情形下，每次push当前所在的分支时候，很多时候都要commit本地分支，pull远程分支，<br>merge之后（有时候还要解决冲突）才能push，这里解释如下。</p>
+<h3 id="1-分支个数"><a href="#1-分支个数" class="headerlink" title="1.分支个数"></a>1.分支个数</h3><p>&#8195;&#8195;比如有这么一个场景：alice和bob都在dev分支下开发，这里就涉及到三个分支: origin dev, alice’s dev, bob’s dev, 最开始三者都指向同<br>一个commit id， 这个commit叫他们的<font color="red"><b>公共祖先</b></font></p>
+<h3 id="2-origin-dev没有人提交代码"><a href="#2-origin-dev没有人提交代码" class="headerlink" title="2.origin dev没有人提交代码"></a>2.origin dev没有人提交代码</h3><p>&#8195;&#8195;现在alice在本地做了一次commit（commit_id_3），bob在本地做了两次commit（commit_id_4, commit_id_4），Alice先把<br>代码推到origin dev，git push相当于git fetch + git push，在alice git push的时候发现origin dev依然指向<b>公共祖先</b>，origin dev一个<br>新commit都没有，这次的merge就是一次简单的fast-forward。此时三个分支的状态如img1。</p>
+<p><img src="/img/befor_bob_push.png" alt="img1"></p>
+<p>&#8195;&#8195;接下来，bob推自己的代码到origin dev，这时候origin dev高于<b>公共祖先</b>，这时候就必须要先pull，拉到orign dev的最新代码到本地，如果没有冲突直接合并，commit message一般都会有一个默认的(Merge branch ‘branch_name’ of reporitory)，用户只需要保存就行；如果有冲突就会有提示，解决完冲突之后，我们需要一次comment，然后再merge origin dev，这时候的和前面没有冲突是一样的了。此时三个分支的状态如img2。</p>
+<p><img src="/img/after_bob_push.png" alt="img2"></p>
+<h3 id="3-note"><a href="#3-note" class="headerlink" title="3.note"></a>3.note</h3><ul>
+<li>1.举例的时候应该用个feature/xxx分支的，dev容易产生误会</li>
+<li>2.多人在一个分支操作的情况实属违背git的宗旨</li>
+<li>3.alice和bob本地的dev分支只与origin dev有merge，二者之间不能有交往</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2018/01/09/git-push/" data-id="cjeh60new000ewbxhsquf5j2n" class="article-share-link" data-share="baidu" data-title="git push发生了什么">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2018/01/09/git-push/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-webbench源码分析(一)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/03/webbench源码分析(一)/" class="article-date">
@@ -107,7 +217,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/03/webbench源码分析(一)/" data-id="cjeftxasq0013zwxhnunv1ufl" class="article-share-link" data-share="baidu" data-title="webbench源码分析(一)">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/03/webbench源码分析(一)/" data-id="cjeh60nff0018wbxhjbm6jgpe" class="article-share-link" data-share="baidu" data-title="webbench源码分析(一)">分享到</a>
       
 
       
@@ -151,97 +261,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/09/09/article-title/" data-id="cjeftxas80004zwxhk5q6bpk1" class="article-share-link" data-share="baidu" data-title="article title">分享到</a>
+        <a data-url="http://yoursite.com/2017/09/09/article-title/" data-id="cjeh60nep0005wbxh0z1j9mhp" class="article-share-link" data-share="baidu" data-title="article title">分享到</a>
       
 
       
         <a href="http://yoursite.com/2017/09/09/article-title/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-testd2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/09/testd2/" class="article-date">
-  <time datetime="2017-09-09T14:22:01.000Z" itemprop="datePublished">2017-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/09/testd2/">mysql-存储1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h2><p>upgrade</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2017/09/09/testd2/" data-id="cjeftxasp0010zwxh76mxroe1" class="article-share-link" data-share="baidu" data-title="mysql-存储1">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2017/09/09/testd2/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-testd" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/09/testd/" class="article-date">
-  <time datetime="2017-09-09T14:22:01.000Z" itemprop="datePublished">2017-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/09/testd/">mysql-存储</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>cmake</p>
-<h2 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h2>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2017/09/09/testd/" data-id="cjeftxasm000tzwxhorfu2ne1" class="article-share-link" data-share="baidu" data-title="mysql-存储">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2017/09/09/testd/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -292,7 +316,7 @@
 
 
       </style>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/goLang/">goLang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movies/">movies</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/movies/权利的游戏/">权利的游戏</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/">我的作品</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/min-bench/">min-bench</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/">源码阅读</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/webbench/">webbench</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TCP-IP协议/">TCP/IP协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/goLang/">goLang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movies/">movies</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/movies/权利的游戏/">权利的游戏</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/协议/">协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/">我的作品</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/min-bench/">min-bench</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/">源码阅读</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/webbench/">webbench</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -302,7 +326,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Games/">Games</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS3/">PS3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/">book</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashtable/">hashtable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/min-bench/">min-bench</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/movie/">movie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/times33/">times33</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbench/">webbench</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zend-string/">zend_string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络编程/">网络编程</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diffie-Hellman/">Diffie-Hellman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Games/">Games</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS3/">PS3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSA/">RSA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/">book</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashtable/">hashtable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/min-bench/">min-bench</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/movie/">movie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/times33/">times33</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbench/">webbench</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zend-string/">zend_string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络编程/">网络编程</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -311,7 +335,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Games/" style="font-size: 10px;">Games</a> <a href="/tags/PS3/" style="font-size: 10px;">PS3</a> <a href="/tags/book/" style="font-size: 10px;">book</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/hashtable/" style="font-size: 10px;">hashtable</a> <a href="/tags/min-bench/" style="font-size: 10px;">min-bench</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/times33/" style="font-size: 10px;">times33</a> <a href="/tags/webbench/" style="font-size: 15px;">webbench</a> <a href="/tags/zend-string/" style="font-size: 10px;">zend_string</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a>
+      <a href="/tags/Diffie-Hellman/" style="font-size: 10px;">Diffie-Hellman</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Games/" style="font-size: 10px;">Games</a> <a href="/tags/PS3/" style="font-size: 10px;">PS3</a> <a href="/tags/RSA/" style="font-size: 10px;">RSA</a> <a href="/tags/book/" style="font-size: 10px;">book</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/hashtable/" style="font-size: 10px;">hashtable</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/min-bench/" style="font-size: 10px;">min-bench</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/times33/" style="font-size: 10px;">times33</a> <a href="/tags/webbench/" style="font-size: 15px;">webbench</a> <a href="/tags/zend-string/" style="font-size: 10px;">zend_string</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a>
     </div>
   </div>
 
@@ -320,7 +344,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -332,6 +356,14 @@
       <ul>
         
           <li>
+            <a href="/2018/03/07/https协议/">https协议</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/07/Diffie-Hellman密钥交换算法/">Diffie-Hellman密钥交换算法</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/06/php内核HashTable/">php内核HashTable</a>
           </li>
         
@@ -341,14 +373,6 @@
         
           <li>
             <a href="/2018/01/25/min-bench/">min-bench</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/24/webbench源码分析(二)/">webbench源码分析(二)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/11/提利尔及家族/">提利尔及家族(玫瑰)</a>
           </li>
         
       </ul>
