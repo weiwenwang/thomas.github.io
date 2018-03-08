@@ -67,6 +67,52 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-兰尼斯特家族" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/11/兰尼斯特家族/" class="article-date">
+  <time datetime="2018-01-11T11:13:47.000Z" itemprop="datePublished">2018-01-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/movies/">movies</a>►<a class="article-category-link" href="/categories/movies/权利的游戏/">权利的游戏</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/11/兰尼斯特家族/">兰尼斯特家族(狮)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2018/01/11/兰尼斯特家族/" data-id="cjehu7erw001d6bxhsc68t5ej" class="article-share-link" data-share="baidu" data-title="兰尼斯特家族(狮)">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2018/01/11/兰尼斯特家族/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-史塔克家族" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/11/史塔克家族/" class="article-date">
@@ -127,7 +173,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/11/史塔克家族/" data-id="cjehu75ok001e5nxhialu3vmy" class="article-share-link" data-share="baidu" data-title="史塔克家族(狼)">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/11/史塔克家族/" data-id="cjehu7erx001e6bxhl4hpq9gp" class="article-share-link" data-share="baidu" data-title="史塔克家族(狼)">分享到</a>
       
 
       
@@ -197,7 +243,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/10/git-graph/" data-id="cjehu75nu00065nxh2rerra2v" class="article-share-link" data-share="baidu" data-title="解读graph图">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/10/git-graph/" data-id="cjehu7era00066bxhnpqjlyaq" class="article-share-link" data-share="baidu" data-title="解读graph图">分享到</a>
       
 
       
@@ -255,7 +301,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/09/books/" data-id="cjehu75ns00055nxhfrh7t8g3" class="article-share-link" data-share="baidu" data-title="Books">分享到</a>
+        <a data-url="http://yoursite.com/2018/01/09/books/" data-id="cjehu7er900056bxhsudhyuzj" class="article-share-link" data-share="baidu" data-title="Books">分享到</a>
       
 
       
@@ -264,57 +310,6 @@
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/book/">book</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-socket边界情况" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/09/socket边界情况/" class="article-date">
-  <time datetime="2018-01-09T09:24:00.000Z" itemprop="datePublished">2018-01-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/网络编程/">网络编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/09/socket边界情况/">socket边界情况</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>socket编程中正常情况都是一样的，异常则是各种各样，研究的demo是经典的回射程序</p>
-<h3 id="1-回射程序服务端、客户端代码"><a href="#1-回射程序服务端、客户端代码" class="headerlink" title="1.回射程序服务端、客户端代码"></a>1.回射程序服务端、客户端代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">服务端:</div><div class="line">	int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);</div><div class="line"></div><div class="line">	struct sockaddr_in serv_addr;</div><div class="line">	memset(&amp;serv_addr, 0, sizeof(serv_addr));</div><div class="line">	serv_addr.sin_family = AF_INET;</div><div class="line">	serv_addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);</div><div class="line">	serv_addr.sin_port = htons(8888);</div><div class="line"></div><div class="line">	bind(listen_sock, (struct sockaddr *) &amp;serv_addr, sizeof(serv_addr));</div><div class="line"></div><div class="line">	listen(listen_sock, 20);</div><div class="line"></div><div class="line">	struct sockaddr_in conn_addr;</div><div class="line">	socklen_t conn_addr_size = sizeof(conn_addr);</div><div class="line">	int conn_sock = accept(listen_sock, (struct sockaddr *) &amp;conn_addr, &amp;conn_addr_size);</div><div class="line"></div><div class="line">	char str[] = &quot;hello world&quot;;</div><div class="line">	write(conn_sock, str, sizeof(str));</div><div class="line"></div><div class="line">	close(listen_sock);</div><div class="line">	close(conn_sock);</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">客户端:</div><div class="line">	int conn_sock = socket(AF_INET, SOCK_STREAM, 0);</div><div class="line"></div><div class="line">	struct sockaddr_in serv_addr;</div><div class="line">	memset(&amp;serv_addr, 0, sizeof(serv_addr));</div><div class="line"></div><div class="line">	serv_addr.sin_family = AF_INET;</div><div class="line">	serv_addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);</div><div class="line">	serv_addr.sin_port = htons(8888);</div><div class="line"></div><div class="line">	connect(conn_sock, (struct sockaddr *) &amp;serv_addr, sizeof(serv_addr));</div><div class="line"></div><div class="line">	char buffer[40];</div><div class="line"></div><div class="line">	read(conn_sock, buffer, sizeof(buffer) - 1);</div><div class="line">	printf(&quot;message from server: %s \n&quot;, buffer);</div><div class="line">	close(conn_sock);</div></pre></td></tr></table></figure>
-<h3 id="客户和服务端启动的时候"><a href="#客户和服务端启动的时候" class="headerlink" title="客户和服务端启动的时候"></a>客户和服务端启动的时候</h3><h3 id="客户正常终止"><a href="#客户正常终止" class="headerlink" title="客户正常终止"></a>客户正常终止</h3><h3 id="服务端先与客户端终止"><a href="#服务端先与客户端终止" class="headerlink" title="服务端先与客户端终止"></a>服务端先与客户端终止</h3><h3 id="服务主机崩溃"><a href="#服务主机崩溃" class="headerlink" title="服务主机崩溃"></a>服务主机崩溃</h3>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/01/09/socket边界情况/" data-id="cjehu75o8000t5nxhliypou4v" class="article-share-link" data-share="baidu" data-title="socket边界情况">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2018/01/09/socket边界情况/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络编程/">网络编程</a></li></ul>
 
     </footer>
   </div>
@@ -363,7 +358,7 @@
 
 
       </style>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GoLang/">GoLang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TCP-IP协议/">TCP/IP协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movies/">movies</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/movies/权利的游戏/">权利的游戏</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/">我的作品</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/min-bench/">min-bench</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/">源码阅读</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/webbench/">webbench</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GoLang/">GoLang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TCP-IP协议/">TCP/IP协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movies/">movies</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/movies/权利的游戏/">权利的游戏</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/">我的作品</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/min-bench/">min-bench</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/">源码阅读</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/webbench/">webbench</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -373,7 +368,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Games/">Games</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS3/">PS3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/">book</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashtable/">hashtable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/min-bench/">min-bench</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/movie/">movie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/times33/">times33</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbench/">webbench</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zend-string/">zend_string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络编程/">网络编程</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Games/">Games</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS3/">PS3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/">book</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashtable/">hashtable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/min-bench/">min-bench</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/movie/">movie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/times33/">times33</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbench/">webbench</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zend-string/">zend_string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/互斥锁/">互斥锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/条件变量/">条件变量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络编程/">网络编程</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -382,7 +377,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Games/" style="font-size: 10px;">Games</a> <a href="/tags/PS3/" style="font-size: 10px;">PS3</a> <a href="/tags/book/" style="font-size: 10px;">book</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/hashtable/" style="font-size: 10px;">hashtable</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/min-bench/" style="font-size: 10px;">min-bench</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/times33/" style="font-size: 10px;">times33</a> <a href="/tags/webbench/" style="font-size: 15px;">webbench</a> <a href="/tags/zend-string/" style="font-size: 10px;">zend_string</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a>
+      <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Games/" style="font-size: 10px;">Games</a> <a href="/tags/PS3/" style="font-size: 10px;">PS3</a> <a href="/tags/book/" style="font-size: 10px;">book</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/hashtable/" style="font-size: 10px;">hashtable</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/min-bench/" style="font-size: 10px;">min-bench</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/times33/" style="font-size: 10px;">times33</a> <a href="/tags/webbench/" style="font-size: 15px;">webbench</a> <a href="/tags/zend-string/" style="font-size: 10px;">zend_string</a> <a href="/tags/互斥锁/" style="font-size: 10px;">互斥锁</a> <a href="/tags/条件变量/" style="font-size: 10px;">条件变量</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a>
     </div>
   </div>
 
@@ -391,7 +386,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -401,6 +396,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/08/条件变量和互斥锁/">条件变量和互斥锁</a>
+          </li>
         
           <li>
             <a href="/2018/03/07/https协议/">https协议</a>
@@ -416,10 +415,6 @@
         
           <li>
             <a href="/2018/01/25/min-bench/">min-bench</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/24/webbench源码分析(二)/">webbench源码分析(二)</a>
           </li>
         
       </ul>
