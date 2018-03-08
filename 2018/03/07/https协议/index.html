@@ -6,20 +6,20 @@
   
   <title>https协议 | Thomas&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="https的速度回比http慢,但是安全 对称加密与非对称加密对称加密是采用想用的密钥来加解密, 有点是速度比较快,缺点是和多人交流的时候,需要管理多个密钥,非对称加密是加解密采用公钥和私钥,公钥加密只有私钥解密,私钥加密只能公钥解密, 这样可以验证身份，可以保证机密性 httpshttps是在应用层http协议到传输层tcp协议之间添加一个ssl层，当客户端在请求服务器的时候，首先是tcp的三次">
+  <meta name="description" content="https的速度回比http慢, 但是安全 对称加密与非对称加密对称加密是采用想用的密钥来加解密, 优点是速度比较快, 缺点是和多人交流的时候, 需要管理多个密钥。非对称加密是加解密采用公钥和私钥, 公钥加密只有私钥解密, 私钥加密只能公钥解密, 这样可以验证身份, 可以保证机密性,但是效率慢, https协议采用了两者结合 httpshttps是在应用层http协议到传输层tcp协议之间添加一个">
 <meta name="keywords" content="https">
 <meta property="og:type" content="article">
 <meta property="og:title" content="https协议">
 <meta property="og:url" content="http://yoursite.com/2018/03/07/https协议/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
-<meta property="og:description" content="https的速度回比http慢,但是安全 对称加密与非对称加密对称加密是采用想用的密钥来加解密, 有点是速度比较快,缺点是和多人交流的时候,需要管理多个密钥,非对称加密是加解密采用公钥和私钥,公钥加密只有私钥解密,私钥加密只能公钥解密, 这样可以验证身份，可以保证机密性 httpshttps是在应用层http协议到传输层tcp协议之间添加一个ssl层，当客户端在请求服务器的时候，首先是tcp的三次">
+<meta property="og:description" content="https的速度回比http慢, 但是安全 对称加密与非对称加密对称加密是采用想用的密钥来加解密, 优点是速度比较快, 缺点是和多人交流的时候, 需要管理多个密钥。非对称加密是加解密采用公钥和私钥, 公钥加密只有私钥解密, 私钥加密只能公钥解密, 这样可以验证身份, 可以保证机密性,但是效率慢, https协议采用了两者结合 httpshttps是在应用层http协议到传输层tcp协议之间添加一个">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2018/03/07/5a9ff9bd2c0b1.png">
-<meta property="og:image" content="https://i.loli.net/2018/03/07/5a9ffa06eace1.png">
-<meta property="og:updated_time" content="2018-03-07T14:59:03.276Z">
+<meta property="og:image" content="https://i.loli.net/2018/03/08/5aa0859819503.png">
+<meta property="og:updated_time" content="2018-03-08T01:00:19.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="https协议">
-<meta name="twitter:description" content="https的速度回比http慢,但是安全 对称加密与非对称加密对称加密是采用想用的密钥来加解密, 有点是速度比较快,缺点是和多人交流的时候,需要管理多个密钥,非对称加密是加解密采用公钥和私钥,公钥加密只有私钥解密,私钥加密只能公钥解密, 这样可以验证身份，可以保证机密性 httpshttps是在应用层http协议到传输层tcp协议之间添加一个ssl层，当客户端在请求服务器的时候，首先是tcp的三次">
+<meta name="twitter:description" content="https的速度回比http慢, 但是安全 对称加密与非对称加密对称加密是采用想用的密钥来加解密, 优点是速度比较快, 缺点是和多人交流的时候, 需要管理多个密钥。非对称加密是加解密采用公钥和私钥, 公钥加密只有私钥解密, 私钥加密只能公钥解密, 这样可以验证身份, 可以保证机密性,但是效率慢, https协议采用了两者结合 httpshttps是在应用层http协议到传输层tcp协议之间添加一个">
 <meta name="twitter:image" content="https://i.loli.net/2018/03/07/5a9ff9bd2c0b1.png">
   
     <link rel="alternative" href="/atom.xml" title="Thomas&#39;s blog" type="application/atom+xml">
@@ -99,17 +99,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>https的速度回比http慢,但是安全</p>
-<h3 id="对称加密与非对称加密"><a href="#对称加密与非对称加密" class="headerlink" title="对称加密与非对称加密"></a>对称加密与非对称加密</h3><p>对称加密是采用想用的密钥来加解密, 有点是速度比较快,缺点是和多人交流的时候,需要管理多个密钥,非对称<br>加密是加解密采用公钥和私钥,公钥加密只有私钥解密,私钥加密只能公钥解密, 这样可以验证身份，可以保证机密性</p>
-<h3 id="https"><a href="#https" class="headerlink" title="https"></a>https</h3><p>https是在应用层http协议到传输层tcp协议之间添加一个ssl层，当客户端在请求服务器的时候，首先是tcp的三次握手<br><a href="https://i.loli.net/2018/03/07/5a9ff9bd2c0b1.png" target="_blank" rel="external"><img src="https://i.loli.net/2018/03/07/5a9ff9bd2c0b1.png" alt="hand.png"></a><br>然后 客户端向服务器发送自己支持的非对称加密算法，然后服务器向客户端发送自己的证书，<a href="https://www.baidu.com" target="_blank" rel="external">这个证书是如何由来的呢</a>, 接下来客户端会对这个证书做一下验证，证书是否过期等，没问题之后，请求证书的办法机构的公钥，对证书的签名进行解密，解密成功说明证书没问题，是我们要访问的目标网站，然后对证书hash值是否等于签名。一切都没问题了，非对称加密的部分就结束了</p>
-<p>上面的步骤是对了得到目标网站的公钥，现在拿到公钥了，开始交换对称秘钥了，客户端随机生成一个秘钥，用服务器的公钥加密，发给服务器，服务器用自己的私钥解密，拿到里面的对称加密的秘钥，这样对称加密的秘钥就商量好了，中间看到的都是密文，不会泄露这个秘钥，接下来的数据来回，都要用商量的秘钥来加解密</p>
-<p><a href="https://i.loli.net/2018/03/07/5a9ffa06eace1.png" target="_blank" rel="external"><img src="https://i.loli.net/2018/03/07/5a9ffa06eace1.png" alt="client-server.png"></a></p>
+        <p>https的速度回比http慢, 但是安全</p>
+<h3 id="对称加密与非对称加密"><a href="#对称加密与非对称加密" class="headerlink" title="对称加密与非对称加密"></a>对称加密与非对称加密</h3><p>对称加密是采用想用的密钥来加解密, 优点是速度比较快, 缺点是和多人交流的时候, 需要管理多个密钥。<br>非对称加密是加解密采用公钥和私钥, 公钥加密只有私钥解密, 私钥加密只能公钥解密, 这样可以验证身份, 可以保证机密性,<br>但是效率慢, https协议采用了两者结合</p>
+<h3 id="https"><a href="#https" class="headerlink" title="https"></a>https</h3><p>https是在应用层http协议到传输层tcp协议之间添加一个ssl层, 当客户端在请求服务器的时候, 首先是tcp的三次握手<br><a href="https://i.loli.net/2018/03/07/5a9ff9bd2c0b1.png" target="_blank" rel="external"><img src="https://i.loli.net/2018/03/07/5a9ff9bd2c0b1.png" alt="hand.png"></a></p>
+<ul>
+<li>客户端向服务器发送自己支持的非对称加密算法</li>
+<li>服务器向客户端发送自己的证书, <a href="https://www.baidu.com" target="_blank" rel="external">这个证书是如何由来的呢</a></li>
+<li>接下来客户端会对这个证书做一下验证, 证书是否过期等</li>
+<li>请求证书的颁发机构的公钥, 对证书的签名进行解密, 解密成功说明证书没问题, 是我们要访问的目标网站</li>
+<li>然后对证书hash值是否等于签名。一切都没问题了, 非对称加密的部分就结束了</li>
+<li>上面的步骤得到目标网站的公钥(P), 开始交换对称秘钥了, 客户端随机生成一个秘钥, 用P加密, 发给服务器</li>
+<li>服务器用自己的私钥解密, 拿到里面的对称加密的秘钥(S), 这样对称加密的秘钥就商量好了, 中间看到的都是密文, 不会泄露这个秘钥, 接下来的数据来回, 都要用秘钥S来加解密</li>
+</ul>
+<p><a href="https://i.loli.net/2018/03/08/5aa0859819503.png" target="_blank" rel="external"><img src="https://i.loli.net/2018/03/08/5aa0859819503.png" alt="https.png"></a></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>https每次请求都要经过一些对称加密秘钥的商量</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/03/07/https协议/" data-id="cjeh60nf0000lwbxhekzl4d04" class="article-share-link" data-share="baidu" data-title="https协议">分享到</a>
+        <a data-url="http://yoursite.com/2018/03/07/https协议/" data-id="cjehs8ysr000azoxh015bg4gb" class="article-share-link" data-share="baidu" data-title="https协议">分享到</a>
       
 
       
@@ -175,7 +186,7 @@
 
 
       </style>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TCP-IP协议/">TCP/IP协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/goLang/">goLang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movies/">movies</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/movies/权利的游戏/">权利的游戏</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/协议/">协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/">我的作品</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/min-bench/">min-bench</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/">源码阅读</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/webbench/">webbench</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GoLang/">GoLang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TCP-IP协议/">TCP/IP协议</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movies/">movies</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/movies/权利的游戏/">权利的游戏</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/">我的作品</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/我的作品/min-bench/">min-bench</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/">源码阅读</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/源码阅读/webbench/">webbench</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
