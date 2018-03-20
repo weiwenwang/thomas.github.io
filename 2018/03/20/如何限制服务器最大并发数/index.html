@@ -4,15 +4,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: webbench | Thomas&#39;s blog</title>
+  <title>如何限制服务器最大并发数 | Thomas&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Thomas&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/webbench/index.html">
+  <meta name="description" content="这里说的并发数不是并行, 也不是并发量(qps/qpm), 是服务端同时支持的客户端连接数每个连接至少占用一个文件描述符, 这样服务器的描述符迟早是用完的, 在网络编程中, 我们通常用Reactor模式, 当连接请求到来的时候, 服务端的监听套接字变得可读(POLLIN),然后accept得到一个新的socket描述符. 可能有人会说, 资源完了, accept之后close不就行了嘛, 其实不然">
+<meta name="keywords" content="并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何限制服务器最大并发数">
+<meta property="og:url" content="http://yoursite.com/2018/03/20/如何限制服务器最大并发数/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
+<meta property="og:description" content="这里说的并发数不是并行, 也不是并发量(qps/qpm), 是服务端同时支持的客户端连接数每个连接至少占用一个文件描述符, 这样服务器的描述符迟早是用完的, 在网络编程中, 我们通常用Reactor模式, 当连接请求到来的时候, 服务端的监听套接字变得可读(POLLIN),然后accept得到一个新的socket描述符. 可能有人会说, 资源完了, accept之后close不就行了嘛, 其实不然">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-20T14:33:04.859Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Thomas&#39;s blog">
+<meta name="twitter:title" content="如何限制服务器最大并发数">
+<meta name="twitter:description" content="这里说的并发数不是并行, 也不是并发量(qps/qpm), 是服务端同时支持的客户端连接数每个连接至少占用一个文件描述符, 这样服务器的描述符迟早是用完的, 在网络编程中, 我们通常用Reactor模式, 当连接请求到来的时候, 服务端的监听套接字变得可读(POLLIN),然后accept得到一个新的socket描述符. 可能有人会说, 资源完了, accept之后close不就行了嘛, 其实不然">
   
     <link rel="alternative" href="/atom.xml" title="Thomas&#39;s blog" type="application/atom+xml">
   
@@ -65,59 +70,77 @@
 </header>
 
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/24/webbench源码分析(二)/" class="archive-article-date">
-  <time datetime="2018-01-24T15:43:51.000Z" itemprop="datePublished">1月 24</time>
+      <section id="main"><article id="post-如何限制服务器最大并发数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/20/如何限制服务器最大并发数/" class="article-date">
+  <time datetime="2018-03-20T13:54:40.000Z" itemprop="datePublished">2018-03-20</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络编程/">网络编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/24/webbench源码分析(二)/">webbench源码分析(二)</a>
+    <h1 class="article-title" itemprop="name">
+      如何限制服务器最大并发数
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/03/webbench源码分析(一)/" class="archive-article-date">
-  <time datetime="2018-01-03T15:09:18.000Z" itemprop="datePublished">1月 3</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/03/webbench源码分析(一)/">webbench源码分析(一)</a>
-    </h1>
-  
+        <p>这里说的并发数不是并行, 也不是并发量(qps/qpm), 是服务端同时支持的客户端连接数每个连接至少占用一个文件描述符, 这样服务器<br>的描述符迟早是用完的, 在网络编程中, 我们通常用Reactor模式, 当连接请求到来的时候, 服务端的监听套接字变得可读(POLLIN),<br>然后accept得到一个新的socket描述符. 可能有人会说, 资源完了, accept之后close不就行了嘛, 其实不然, 资源用完了,accept<br>都不会成功的, 多余的请求会一直排在队列里面的, 当资源用完的时候, 可以有一下几种方式:</p>
+<ul>
+<li>调高服务器每个进程可以打开的文件描述符个数, 治标不治本</li>
+<li>鸵鸟算法, 一直等着, 等现有的描述符释放</li>
+<li>关闭监听套接字, 现在太忙了, 服务端接纳新的连接了</li>
+<li>用边缘触发模式, 下次epoll_wait就不会返回了, 就是丢掉这次请求的意思</li>
+<li>准备一些空闲的描述符, 当请求数达到上限了, 先释放掉一个空闲的, 然后accept一个请求, 然后立即close掉, 然后在申请一个空闲<br>的, 周而复始</li>
+</ul>
+<h3 id="note"><a href="#note" class="headerlink" title="note"></a>note</h3><p>参考《linux多线程服务器编程-muduo》</p>
 
-    </header>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2018/03/20/如何限制服务器最大并发数/" data-id="cjezrh4r2001zfrxht0v5mqr1" class="article-share-link" data-share="baidu" data-title="如何限制服务器最大并发数">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2018/03/20/如何限制服务器最大并发数/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/03/20/判断括号是否合法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">判断括号是否合法</div>
+    </a>
   
+</nav>
 
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2018/03/20/如何限制服务器最大并发数/" data-title="如何限制服务器最大并发数" data-url="http://yoursite.com/2018/03/20/如何限制服务器最大并发数/"></div>
+  </section>
 </section>
       
       <aside id="sidebar">
