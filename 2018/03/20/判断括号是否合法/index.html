@@ -4,15 +4,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Thomas&#39;s blog</title>
+  <title>判断括号是否合法 | Thomas&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Thomas&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+  <meta name="description" content="判断一个字符串里面的括号是否合法判断2个要点:  任何位置到起始位置, 左括号的数量不能大于右括号数量 字符串结束的时候, 左右括号的数量要相等  12345678910111213141516171819202122232425262728int checkoutBrackets(const char *str) &amp;#123;  int left = 0;  while(*str != &apos;\0&apos;">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="判断括号是否合法">
+<meta property="og:url" content="http://yoursite.com/2018/03/20/判断括号是否合法/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
+<meta property="og:description" content="判断一个字符串里面的括号是否合法判断2个要点:  任何位置到起始位置, 左括号的数量不能大于右括号数量 字符串结束的时候, 左右括号的数量要相等  12345678910111213141516171819202122232425262728int checkoutBrackets(const char *str) &amp;#123;  int left = 0;  while(*str != &apos;\0&apos;">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-20T11:39:23.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Thomas&#39;s blog">
+<meta name="twitter:title" content="判断括号是否合法">
+<meta name="twitter:description" content="判断一个字符串里面的括号是否合法判断2个要点:  任何位置到起始位置, 左括号的数量不能大于右括号数量 字符串结束的时候, 左右括号的数量要相等  12345678910111213141516171819202122232425262728int checkoutBrackets(const char *str) &amp;#123;  int left = 0;  while(*str != &apos;\0&apos;">
   
     <link rel="alternative" href="/atom.xml" title="Thomas&#39;s blog" type="application/atom+xml">
   
@@ -65,16 +70,14 @@
 </header>
 
     <div class="outer">
-      <section id="main">
-  
-    <article id="post-葛雷乔伊家族" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-判断括号是否合法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/01/11/葛雷乔伊家族/" class="article-date">
-  <time datetime="2018-01-11T11:14:32.000Z" itemprop="datePublished">2018-01-11</time>
+    <a href="/2018/03/20/判断括号是否合法/" class="article-date">
+  <time datetime="2018-03-20T11:35:15.000Z" itemprop="datePublished">2018-03-20</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/movies/">movies</a>►<a class="article-category-link" href="/categories/movies/权利的游戏/">权利的游戏</a>
+    <a class="article-category-link" href="/categories/算法/">算法</a>
   </div>
 
   </div>
@@ -84,8 +87,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/葛雷乔伊家族/">葛雷乔伊家族(海怪)</a>
+    <h1 class="article-title" itemprop="name">
+      判断括号是否合法
     </h1>
   
 
@@ -93,169 +96,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>判断一个字符串里面的括号是否合法<br>判断2个要点:</p>
+<ul>
+<li>任何位置到起始位置, 左括号的数量不能大于右括号数量</li>
+<li>字符串结束的时候, 左右括号的数量要相等</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">checkoutBrackets</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *str)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> left = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(*str != <span class="string">'\0'</span>)</div><div class="line">  &#123;</div><div class="line">      <span class="keyword">if</span> (*str == <span class="string">'('</span>) &#123;</div><div class="line">        left++;</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(*str == <span class="string">')'</span>) &#123;</div><div class="line">        left--;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span> (left &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">      &#125;</div><div class="line">      str++;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (left != <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">char</span> *str=<span class="string">"(())("</span>;</div><div class="line">    <span class="keyword">int</span> ret;</div><div class="line">    ret = checkoutBrackets(str);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ret);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2018/01/11/葛雷乔伊家族/" data-id="cjezl2693002d77xhjmonlrpq" class="article-share-link" data-share="baidu" data-title="葛雷乔伊家族(海怪)">分享到</a>
+        <a data-url="http://yoursite.com/2018/03/20/判断括号是否合法/" data-id="cjezl268k001k77xhfgu83234" class="article-share-link" data-share="baidu" data-title="判断括号是否合法">分享到</a>
       
 
       
-        <a href="http://yoursite.com/2018/01/11/葛雷乔伊家族/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://yoursite.com/2018/03/20/判断括号是否合法/#ds-thread" class="article-comment-link">评论</a>
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
     </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/20/hash函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">SDBMHash函数</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-  
-    <article id="post-艾林家族" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/11/艾林家族/" class="article-date">
-  <time datetime="2018-01-11T11:14:26.000Z" itemprop="datePublished">2018-01-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/movies/">movies</a>►<a class="article-category-link" href="/categories/movies/权利的游戏/">权利的游戏</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/艾林家族/">艾林家族(鹰)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/01/11/艾林家族/" data-id="cjezl268z002877xhtey85w9f" class="article-share-link" data-share="baidu" data-title="艾林家族(鹰)">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2018/01/11/艾林家族/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-拜拉席恩家族" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/11/拜拉席恩家族/" class="article-date">
-  <time datetime="2018-01-11T11:14:18.000Z" itemprop="datePublished">2018-01-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/movies/">movies</a>►<a class="article-category-link" href="/categories/movies/权利的游戏/">权利的游戏</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/拜拉席恩家族/">拜拉席恩家族(鹿)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/01/11/拜拉席恩家族/" data-id="cjezl2691002c77xhfq85t5rf" class="article-share-link" data-share="baidu" data-title="拜拉席恩家族(鹿)">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2018/01/11/拜拉席恩家族/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-坦格利安家族" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/11/坦格利安家族/" class="article-date">
-  <time datetime="2018-01-11T11:14:07.000Z" itemprop="datePublished">2018-01-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/movies/">movies</a>►<a class="article-category-link" href="/categories/movies/权利的游戏/">权利的游戏</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/坦格利安家族/">坦格利安家族(龙)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2018/01/11/坦格利安家族/" data-id="cjezl268v001w77xhzodfa18q" class="article-share-link" data-share="baidu" data-title="坦格利安家族(龙)">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2018/01/11/坦格利安家族/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
-  </nav>
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2018/03/20/判断括号是否合法/" data-title="判断括号是否合法" data-url="http://yoursite.com/2018/03/20/判断括号是否合法/"></div>
+  </section>
 </section>
       
       <aside id="sidebar">
