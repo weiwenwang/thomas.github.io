@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -83,7 +83,7 @@
 <meta property="og:title" content="Thomas&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thomas&#39;s blog">
 
@@ -95,13 +95,13 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -133,14 +133,14 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-right 
+  <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            Home
+            首页
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            About
+            关于
           </a>
         </li>
       
@@ -202,7 +202,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -212,7 +212,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            Categories
+            分类
           </a>
         </li>
       
@@ -220,9 +220,19 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
           </a>
         </li>
       
@@ -288,9 +298,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-14T09:44:29+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T09:44:29+08:00">
                 2018-03-14
               </time>
             
@@ -309,7 +319,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -352,9 +362,16 @@
       
         
           
-            <p> doing</p>
+           doing
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/14/Reactor-pthread-pool/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -430,9 +447,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-08T09:34:42+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T09:34:42+08:00">
                 2018-03-08
               </time>
             
@@ -451,7 +468,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -494,12 +511,16 @@
       
         
           
-            <p>互斥锁可以保持线程安全, 但是在生产者消费者这种情况下, 当消费者等待生产者, 会一直停留在<br>临界区, 这样生产者也无法进入临界区进行生产, 条件变量可以解决</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">pthread_mutex_t</span> mut; <span class="comment">// 互斥锁类型</span></div><div class="line"><span class="keyword">pthread_cond_t</span> cond; <span class="comment">// 条件变量</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Product_pthread 2</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Consume_pthread 2</span></div><div class="line"></div><div class="line"><span class="keyword">pthread_t</span> product_thread[Product_pthread];</div><div class="line"><span class="keyword">pthread_t</span> consume_thread[Consume_pthread];</div><div class="line"></div><div class="line"><span class="keyword">int</span> nready = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">consumer</span><span class="params">(<span class="keyword">void</span> *value)</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</div><div class="line">        pthread_mutex_lock(&amp;mut);</div><div class="line">        <span class="keyword">while</span> (nready == <span class="number">0</span>) &#123; <span class="comment">// 当有多个</span></div><div class="line">            pthread_cond_wait(&amp;cond, &amp;mut);</div><div class="line">        &#125;</div><div class="line">        --nready;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d消费了一个\n"</span>, value);</div><div class="line">        pthread_mutex_unlock(&amp;mut);</div><div class="line">        sleep(<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    pthread_exit(value);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">product</span><span class="params">(<span class="keyword">void</span> *value)</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</div><div class="line">        pthread_mutex_lock(&amp;mut);</div><div class="line"></div><div class="line">        nready++;</div><div class="line">        pthread_cond_signal(&amp;cond);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d生产了一个\n"</span>, value);</div><div class="line">        pthread_mutex_unlock(&amp;mut);</div><div class="line">        sleep(<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    pthread_exit(value);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Product_pthread; ++i) &#123;</div><div class="line">        pthread_create(&amp;product_thread[i], <span class="literal">NULL</span>, product, (<span class="keyword">void</span> *) i);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Consume_pthread; ++i) &#123;</div><div class="line">        pthread_create(&amp;consume_thread[i], <span class="literal">NULL</span>, consumer, (<span class="keyword">void</span> *) i);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Product_pthread; ++i) &#123;</div><div class="line">        <span class="keyword">void</span> *value;</div><div class="line">        <span class="keyword">int</span> ret = pthread_join(product_thread[i], &amp;value);</div><div class="line">        <span class="keyword">if</span> (ret != <span class="number">0</span>) &#123;</div><div class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"pthread_join: %d"</span>, strerror(ret));</div><div class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Consume_pthread; ++i) &#123;</div><div class="line">        <span class="keyword">void</span> *value;</div><div class="line">        <span class="keyword">int</span> ret = pthread_join(consume_thread[i], &amp;value);</div><div class="line">        <span class="keyword">if</span> (ret != <span class="number">0</span>) &#123;</div><div class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"pthread_join: %d"</span>, strerror(ret));</div><div class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>#21行<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (nready == <span class="number">0</span>) &#123;</div></pre></td></tr></table></figure></p>
-<p>当有多个消费者线程执行到pthread_cond_wait, 这时生产者发送信息, 会造成惊群现象, 很多唤醒的线程是<br>无效的, 会继续执行到pthread_cond_wait</p>
-
-          
+          互斥锁可以保持线程安全, 但是在生产者消费者这种情况下, 当消费者等待生产者, 会一直停留在临界区, 这样生产者也无法进入临界区进行生产, 条件变量可以解决
+12345678910111213141516171819202122232425262728293031323334353637383940
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/08/条件变量和互斥锁/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -575,9 +596,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-07T22:14:22+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-07T22:14:22+08:00">
                 2018-03-07
               </time>
             
@@ -596,7 +617,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -639,24 +660,16 @@
       
         
           
-            <p>https的速度回比http慢, 但是安全</p>
-<h3 id="对称加密与非对称加密"><a href="#对称加密与非对称加密" class="headerlink" title="对称加密与非对称加密"></a>对称加密与非对称加密</h3><p>对称加密是采用想用的密钥来加解密, 优点是速度比较快, 缺点是和多人交流的时候, 需要管理多个密钥。<br>非对称加密是加解密采用公钥和私钥, 公钥加密只有私钥解密, 私钥加密只能公钥解密, 这样可以验证身份, 可以保证机密性,<br>但是效率慢, https协议采用了两者结合</p>
-<h3 id="https"><a href="#https" class="headerlink" title="https"></a>https</h3><p>https是在应用层http协议到传输层tcp协议之间添加一个ssl层, 当客户端在请求服务器的时候, 首先是tcp的三次握手<br><a href="https://i.loli.net/2018/03/07/5a9ff9bd2c0b1.png" target="_blank" rel="external"><img src="https://i.loli.net/2018/03/07/5a9ff9bd2c0b1.png" alt="hand.png"></a></p>
-<ul>
-<li>客户端向服务器发送自己支持的非对称加密算法</li>
-<li>服务器向客户端发送自己的证书, <a href="https://www.baidu.com" target="_blank" rel="external">这个证书是如何由来的呢</a></li>
-<li>接下来客户端会对这个证书做一下验证, 证书是否过期等</li>
-<li>请求证书的颁发机构的公钥, 对证书的签名进行解密, 解密成功说明证书没问题, 是我们要访问的目标网站</li>
-<li>然后对证书hash值是否等于签名。一切都没问题了, 非对称加密的部分就结束了</li>
-<li>上面的步骤得到目标网站的公钥(P), 开始交换对称秘钥了, 客户端随机生成一个秘钥, 用P加密, 发给服务器</li>
-<li>服务器用自己的私钥解密, 拿到里面的对称加密的秘钥(S), 这样对称加密的秘钥就商量好了, 中间看到的都是密文, 不会泄露这个秘钥, 接下来的数据来回, 都要用秘钥S来加解密</li>
-</ul>
-<p><a href="https://i.loli.net/2018/03/08/5aa0859819503.png" target="_blank" rel="external"><img src="https://i.loli.net/2018/03/08/5aa0859819503.png" alt="https.png"></a></p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
-<li>https每次请求都要经过一些对称加密秘钥的商量</li>
-</ul>
-
-          
+          https的速度回比http慢, 但是安全
+对称加密与非对称加密对称加密是采用想用的密钥来加解密, 优点是速度比较快, 缺点是和多人交流的时候, 需要管理多个密钥。非对称加密是加解密采用公钥和私钥, 公钥加密只有私钥解密, 私钥加密只能公钥解密, 这样可以验证身份, 可以保证机密性,但是效率慢, h
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/07/https协议/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -732,9 +745,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-06T23:03:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T23:03:45+08:00">
                 2018-03-06
               </time>
             
@@ -753,7 +766,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -796,11 +809,17 @@
       
         
           
-            <p>玩具代码, 拉链法解决HashTable冲突, 见笑了</p>
-<p><a href="https://i.loli.net/2018/03/07/5a9fa076bc98c.png" target="_blank" rel="external"><img src="https://i.loli.net/2018/03/07/5a9fa076bc98c.png" alt="hashtable.png"></a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></div><div class="line">  <span class="keyword">char</span> *key;</div><div class="line">  <span class="keyword">char</span> *value;</div><div class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></div><div class="line">&#125; Node;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">times33</span><span class="params">(<span class="keyword">char</span> *key, <span class="keyword">int</span> key_len)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> hash = <span class="number">5381</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; key_len; i++) &#123;</div><div class="line">    hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *key++;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> hash;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">Node * <span class="title">initNode</span> <span class="params">(<span class="keyword">char</span> *key, <span class="keyword">char</span> *value)</span> </span>&#123;</div><div class="line">  Node* node = (Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</div><div class="line">  node-&gt;key = key;</div><div class="line">  node-&gt;value = value;</div><div class="line">  node-&gt;next = <span class="literal">NULL</span>;</div><div class="line">  <span class="keyword">return</span> node;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">echoHash</span><span class="params">(Node *hashTable[], <span class="keyword">int</span> size)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> count = <span class="keyword">sizeof</span>(*hashTable)/<span class="keyword">sizeof</span>(hashTable[<span class="number">0</span>]);</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (hashTable[i] != <span class="literal">NULL</span>) &#123;</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"key: %s, value: %s\n"</span>, hashTable[i]-&gt;key, hashTable[i]-&gt;value);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertHashTable</span><span class="params">(Node *hashTable[], <span class="keyword">int</span> size, <span class="keyword">char</span> *key, <span class="keyword">char</span> *value)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> hash_value = times33(key, <span class="built_in">strlen</span>(key)); <span class="comment">// 对key 求hash值</span></div><div class="line">  <span class="keyword">int</span> arr_key = (size - <span class="number">1</span>) &amp; hash_value; <span class="comment">// 把hash值映射到0到（size-1）</span></div><div class="line">  Node *node = initNode(key, value); <span class="comment">// 堆内存上申请一个Node(X)</span></div><div class="line">  node-&gt;next = hashTable[arr_key]; <span class="comment">// X的下个元素是链表的头节点</span></div><div class="line">  hashTable[arr_key] = node; <span class="comment">// 把X作为链表的头结点</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">char</span> * <span class="title">searchValueByKey</span><span class="params">(Node *hashTable[], <span class="keyword">int</span> size, <span class="keyword">char</span> *key)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> hash_value = times33(key, <span class="built_in">strlen</span>(key));</div><div class="line">  <span class="keyword">int</span> arr_key = (size - <span class="number">1</span>) &amp; hash_value;</div><div class="line">  <span class="keyword">if</span> (hashTable[arr_key] != <span class="literal">NULL</span>) &#123; <span class="comment">// 从链表中找key,找到key也就找到value了,找不到就说明没有</span></div><div class="line">      Node *node = hashTable[arr_key];</div><div class="line">      <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">if</span> (node-&gt;key == key) &#123;</div><div class="line">          <span class="keyword">return</span> node-&gt;value;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          node = node-&gt;next;</div><div class="line">        &#125;</div><div class="line">      &#125; <span class="keyword">while</span> (node != <span class="literal">NULL</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="string">"null"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> size = <span class="number">100</span>; <span class="comment">// 定义hashtable的长度</span></div><div class="line">  Node *hashTable[size]; <span class="comment">// 定hashTable(指正数组,每个元素都是指向struct node的指针)</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;<span class="comment">// 全部给赋值NULL</span></div><div class="line">     hashTable[i] = <span class="literal">NULL</span>;</div><div class="line">  &#125;</div><div class="line">  insertHashTable(hashTable, size, <span class="string">"name1"</span>, <span class="string">"wang1"</span>); <span class="comment">// 插入key和对应的value</span></div><div class="line">  insertHashTable(hashTable, size, <span class="string">"name1"</span>, <span class="string">"wang1_rewrite"</span>); <span class="comment">// key相同,则覆盖value</span></div><div class="line">  insertHashTable(hashTable, size, <span class="string">"name2"</span>, <span class="string">"thomas2"</span>);</div><div class="line">  insertHashTable(hashTable, size, <span class="string">"name3"</span>, <span class="string">"thomas3"</span>);</div><div class="line"></div><div class="line">  <span class="keyword">char</span> *key = <span class="string">"name2"</span>;</div><div class="line">  <span class="keyword">char</span> *value = searchValueByKey(hashTable, size, <span class="string">"name1"</span>);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"key: %s, value: %s\n"</span>, key, value);</div><div class="line">  echoHash(hashTable, size);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          玩具代码, 拉链法解决HashTable冲突, 见笑了
 
-          
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/06/php内核HashTable/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -885,7 +904,7 @@
                 <a href="/archives">
               
                   <span class="site-state-item-count">33</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -894,10 +913,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">categories</span>
-                
+                  <span class="site-state-item-name">分类</span>
+                </a>
               </div>
             
 
@@ -905,10 +924,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">18</span>
-                  <span class="site-state-item-name">tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
@@ -953,7 +972,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -961,7 +980,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 

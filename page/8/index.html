@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -83,7 +83,7 @@
 <meta property="og:title" content="Thomas&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/page/8/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thomas&#39;s blog">
 
@@ -95,13 +95,13 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -133,14 +133,14 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-right 
+  <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            Home
+            首页
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            About
+            关于
           </a>
         </li>
       
@@ -202,7 +202,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -212,7 +212,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            Categories
+            分类
           </a>
         </li>
       
@@ -220,9 +220,19 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
           </a>
         </li>
       
@@ -288,9 +298,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-09T22:20:14+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T22:20:14+08:00">
                 2017-09-09
               </time>
             
@@ -330,17 +340,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/09/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -416,9 +424,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-05T20:23:48+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T20:23:48+08:00">
                 2017-04-05
               </time>
             
@@ -437,7 +445,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -480,15 +488,16 @@
       
         
           
-            <p>额… ,我用简单的代码，表达PHP内核是如何处理字符串的</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 字符串结构体</span></div><div class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">zend_string</span> &#123;</span></div><div class="line">  <span class="keyword">int</span> gc;</div><div class="line">  <span class="keyword">int</span> hash;</div><div class="line">  <span class="keyword">int</span> len;</div><div class="line">  <span class="keyword">char</span> val[<span class="number">1</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">zend_string</span> <span class="title">zend_string</span>;</span></div><div class="line"></div><div class="line"><span class="comment">// php内核采用的hash算法</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">times33</span><span class="params">(<span class="keyword">char</span> *key, <span class="keyword">int</span> key_len)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> hash = <span class="number">5381</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; key_len; i++) &#123;</div><div class="line">    hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *key++;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> hash;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 初始化字符串的方法</span></div><div class="line"><span class="function">zend_string *<span class="title">initString</span><span class="params">(<span class="keyword">char</span> *<span class="built_in">string</span>, <span class="keyword">int</span> *len)</span> </span>&#123;</div><div class="line">  zend_string * zs = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(zend_string) + *len);</div><div class="line">  zs-&gt;gc = <span class="number">1</span>;</div><div class="line">  zs-&gt;hash = times33(<span class="built_in">string</span>, *len);</div><div class="line">  zs-&gt;len = *len;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; *len; i++) &#123;</div><div class="line">    zs-&gt;val[i] = <span class="built_in">string</span>[i];</div><div class="line">  &#125;</div><div class="line">  zs-&gt;val[*len] = <span class="string">'\0'</span>;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> zs;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>struct _zend_string这个结构体,包含三个变量,分别介绍:</p>
-<blockquote>
-<p>int gc 引用计数统计<br>int hash 该字符串的hash值<br>int len 字符串的长度, 二进制安全的, 不会出现控制符就结束字符串<br>char val[1] 一个长度的字符数组</p>
-</blockquote>
-<p>咋一看_zend_string没有保存字符串的地方, 其实,初始化方法(initString)中, 在申请内存的时候会 + 字符串的长度, 然后,把字符串存在这个多申请的内存里面,不错其实位置要往前挪一个字节,挪到_zend_string var的位置, 最后空出来的一个字节存空字符(\0)</p>
-
-          
+          额… ,我用简单的代码，表达PHP内核是如何处理字符串的
+1234567891011121314151617181920212223242526272829303132// 字符串结构体struct _zend_string &#123;  int gc;  int hash;  int len; 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/05/php内核zend-string/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -564,9 +573,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-01T22:46:22+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-01T22:46:22+08:00">
                 2017-04-01
               </time>
             
@@ -585,7 +594,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -628,12 +637,16 @@
       
         
           
-            <p>我也来写一下times33, 据说这个算法是字符串最好的哈希算法</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">times33</span><span class="params">(<span class="keyword">char</span> *key, <span class="keyword">int</span> key_len)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> hash = <span class="number">5381</span>; <span class="comment">// 借鉴php源码里选用5381作为hash值的基数</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; key_len; i++) &#123;</div><div class="line">    hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *key++;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> hash;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> name[] = <span class="string">"abcdefg"</span>;</div><div class="line">  <span class="keyword">int</span> hash = times33(name, <span class="built_in">strlen</span>(name));</div><div class="line">  <span class="keyword">int</span> rand = <span class="number">10000</span>;</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, hash &amp; rand);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>对一个基数乘以33, 乘完之后的结果加上要加密的字符串的最末尾, 得到的值作为新的基数,<br>然后是对字符串的倒数第二位, 这样周而复始, 直到字符串结束</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>通过times33对字符串计算得到的结果是一个很大的数字，我们一般要把这个大值, 映射到一个具体的范围(x), 这就需要与x取与</p>
-
-          
+          我也来写一下times33, 据说这个算法是字符串最好的哈希算法
+代码123456789101112131415161718#include &lt;stdio.h&gt;#include &lt;string.h&gt;int times33(char *key, int key_len) &#1
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/01/PHP内核times33/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -709,9 +722,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T19:14:48+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-11T19:14:48+08:00">
                 2017-01-11
               </time>
             
@@ -730,7 +743,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -741,7 +754,7 @@
 
                 
                 
-                  , 
+                  ， 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -784,8 +797,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/11/马泰尔家族/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -870,7 +890,7 @@
                 <a href="/archives">
               
                   <span class="site-state-item-count">33</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -879,10 +899,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">categories</span>
-                
+                  <span class="site-state-item-name">分类</span>
+                </a>
               </div>
             
 
@@ -890,10 +910,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">18</span>
-                  <span class="site-state-item-name">tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
@@ -938,7 +958,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -946,7 +966,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
