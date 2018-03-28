@@ -88,7 +88,7 @@
 <meta property="og:description" content="动态字符串Redis中没有使用c语言原始的字符串, 而是自定义了一个结构体, 叫动态字符串  12345struct sdshdr &amp;#123;  unsigned int len; // 字符串的长度  unsigned int free; // 字符串还有多少没有利用  char buf[]; // 字符串的内容&amp;#125;; 这样设计可以做到空间换时间, 如果统计字符串的长度可以直接用len">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/03/22/5ab38b3c4d2de.png">
-<meta property="og:updated_time" content="2018-03-22T10:58:35.634Z">
+<meta property="og:updated_time" content="2018-03-28T02:35:30.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis动态字符串">
 <meta name="twitter:description" content="动态字符串Redis中没有使用c语言原始的字符串, 而是自定义了一个结构体, 叫动态字符串  12345struct sdshdr &amp;#123;  unsigned int len; // 字符串的长度  unsigned int free; // 字符串还有多少没有利用  char buf[]; // 字符串的内容&amp;#125;; 这样设计可以做到空间换时间, 如果统计字符串的长度可以直接用len">
@@ -370,6 +370,11 @@
 <p>这样设计可以做到空间换时间, 如果统计字符串的长度可以直接用len - free, 当append字符串的时候, 不必每次<br>都要拼接内存, 或者重新申请内存把原来的copy过去.</p>
 <h3 id="申请动态字符串"><a href="#申请动态字符串" class="headerlink" title="申请动态字符串"></a>申请动态字符串</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function">sds <span class="title">sdsnewlen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *init, <span class="keyword">size_t</span> initlen)</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> *<span class="title">sh</span>;</span></div><div class="line">    sh = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct sdshdr) + initlen + <span class="number">1</span>); 内存大小 = sdshdr的长度 + 字符串的长度 + 空字符的长度</div><div class="line">    <span class="keyword">if</span> (sh == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    sh-&gt;len = initlen;</div><div class="line">    sh-&gt;<span class="built_in">free</span> = <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span> (initlen &amp;&amp; init) &#123;</div><div class="line">      <span class="built_in">memcpy</span>(sh-&gt;buf, init, initlen); <span class="comment">// 把字符串拷贝到结构体之后</span></div><div class="line">    &#125;</div><div class="line">    sh-&gt;buf[initlen] = <span class="string">'\0'</span>; <span class="comment">// 最后一个字节放控制符</span></div><div class="line">    <span class="keyword">return</span> (<span class="keyword">char</span>*)sh-&gt;buf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>动态字符串在最后一位存放控制符, 主要目标是可以利用c语言字符串处理函数处理sdshdr-&gt;buf</p>
+<h3 id="动态字符串优势"><a href="#动态字符串优势" class="headerlink" title="动态字符串优势"></a>动态字符串优势</h3><ul>
+<li>动态字符串获取长度快, 普通字符串获取长度要遍历一遍, 时间复杂度O(N)</li>
+<li>动态字符串可以惰性释放, 一定程度上避免内存的重新分配, 当字符串变短的时候, 动态字符串空间大小不变动, 只是改free值<br>当字符串重新变长的时候, 动态数组可能不需要扩大空间就可以存储这个字符串, 有一定的伸缩空间</li>
+<li>字符串二进制安全, 可以在字符串内部存’\0’</li>
+</ul>
 
       
     </div>
@@ -409,6 +414,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/22/redis-sdstrim/" rel="prev" title="redis sdstrim">
+                redis sdstrim <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -485,7 +494,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -496,7 +505,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -507,7 +516,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -540,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态字符串"><span class="nav-number">1.</span> <span class="nav-text">动态字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#申请动态字符串"><span class="nav-number">2.</span> <span class="nav-text">申请动态字符串</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态字符串"><span class="nav-number">1.</span> <span class="nav-text">动态字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#申请动态字符串"><span class="nav-number">2.</span> <span class="nav-text">申请动态字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态字符串优势"><span class="nav-number">3.</span> <span class="nav-text">动态字符串优势</span></a></li></ol></div>
             
 
           </div>
