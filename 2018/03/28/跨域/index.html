@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="sds," />
+  <meta name="keywords" content="跨域," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="动态字符串Redis中没有使用c语言原始的字符串, 而是自定义了一个结构体, 叫动态字符串  12345struct sdshdr &amp;#123;  unsigned int len; // 字符串的长度  unsigned int free; // 字符串还有多少没有利用  char buf[]; // 字符串的内容&amp;#125;; 这样设计可以做到空间换时间, 如果统计字符串的长度可以直接用len">
-<meta name="keywords" content="sds">
+<meta name="description" content="同源策略聊跨域之前不得不说同源策略, 同源策略是浏览器的一种安全机制, 不同源的客户端脚本在没有明确授权的情况下, 不能读写对方资源. 所以a.com下的js脚本采用ajax读取不到b.com里面的文件数据. 所谓同源是指, 域名, 协议类型/版本, 端口都要相同. 跨域解决方式jsonp  在a脚本里面GET方式请求b站点上的js文件, 同时把回调函数传过去, 数据其实在b站点的那个js文件里面">
+<meta name="keywords" content="跨域">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis动态字符串">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/redis动态字符串/index.html">
+<meta property="og:title" content="跨域">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/跨域/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
-<meta property="og:description" content="动态字符串Redis中没有使用c语言原始的字符串, 而是自定义了一个结构体, 叫动态字符串  12345struct sdshdr &amp;#123;  unsigned int len; // 字符串的长度  unsigned int free; // 字符串还有多少没有利用  char buf[]; // 字符串的内容&amp;#125;; 这样设计可以做到空间换时间, 如果统计字符串的长度可以直接用len">
+<meta property="og:description" content="同源策略聊跨域之前不得不说同源策略, 同源策略是浏览器的一种安全机制, 不同源的客户端脚本在没有明确授权的情况下, 不能读写对方资源. 所以a.com下的js脚本采用ajax读取不到b.com里面的文件数据. 所谓同源是指, 域名, 协议类型/版本, 端口都要相同. 跨域解决方式jsonp  在a脚本里面GET方式请求b站点上的js文件, 同时把回调函数传过去, 数据其实在b站点的那个js文件里面">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2018/03/22/5ab38b3c4d2de.png">
-<meta property="og:updated_time" content="2018-03-28T02:35:30.826Z">
+<meta property="og:updated_time" content="2018-03-29T01:51:47.536Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis动态字符串">
-<meta name="twitter:description" content="动态字符串Redis中没有使用c语言原始的字符串, 而是自定义了一个结构体, 叫动态字符串  12345struct sdshdr &amp;#123;  unsigned int len; // 字符串的长度  unsigned int free; // 字符串还有多少没有利用  char buf[]; // 字符串的内容&amp;#125;; 这样设计可以做到空间换时间, 如果统计字符串的长度可以直接用len">
-<meta name="twitter:image" content="https://i.loli.net/2018/03/22/5ab38b3c4d2de.png">
+<meta name="twitter:title" content="跨域">
+<meta name="twitter:description" content="同源策略聊跨域之前不得不说同源策略, 同源策略是浏览器的一种安全机制, 不同源的客户端脚本在没有明确授权的情况下, 不能读写对方资源. 所以a.com下的js脚本采用ajax读取不到b.com里面的文件数据. 所谓同源是指, 域名, 协议类型/版本, 端口都要相同. 跨域解决方式jsonp  在a脚本里面GET方式请求b站点上的js文件, 同时把回调函数传过去, 数据其实在b站点的那个js文件里面">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/22/redis动态字符串/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/28/跨域/"/>
 
 
 
 
 
-  <title>redis动态字符串 | Thomas's blog</title>
+  <title>跨域 | Thomas's blog</title>
   
 
 
@@ -275,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/redis动态字符串/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/跨域/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="thomas">
@@ -292,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis动态字符串</h1>
+          <h1 class="post-title" itemprop="name headline">跨域</h1>
         
 
         <div class="post-meta">
@@ -304,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T13:59:53+08:00">
-                2018-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T16:03:06+08:00">
+                2018-03-28
               </time>
             
 
@@ -327,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
                   </a>
                 </span>
 
@@ -364,17 +362,21 @@
       
 
       
-        <h3 id="动态字符串"><a href="#动态字符串" class="headerlink" title="动态字符串"></a>动态字符串</h3><p>Redis中没有使用c语言原始的字符串, 而是自定义了一个结构体, 叫动态字符串</p>
-<p><a href="https://i.loli.net/2018/03/22/5ab38b3c4d2de.png" target="_blank" rel="external"><img src="https://i.loli.net/2018/03/22/5ab38b3c4d2de.png" alt="m144wjksxoz933.png"></a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> &#123;</span></div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> len; <span class="comment">// 字符串的长度</span></div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="built_in">free</span>; <span class="comment">// 字符串还有多少没有利用</span></div><div class="line">  <span class="keyword">char</span> buf[]; <span class="comment">// 字符串的内容</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>这样设计可以做到空间换时间, 如果统计字符串的长度可以直接用len - free, 当append字符串的时候, 不必每次<br>都要拼接内存, 或者重新申请内存把原来的copy过去.</p>
-<h3 id="申请动态字符串"><a href="#申请动态字符串" class="headerlink" title="申请动态字符串"></a>申请动态字符串</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function">sds <span class="title">sdsnewlen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *init, <span class="keyword">size_t</span> initlen)</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> *<span class="title">sh</span>;</span></div><div class="line">    sh = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct sdshdr) + initlen + <span class="number">1</span>); 内存大小 = sdshdr的长度 + 字符串的长度 + 空字符的长度</div><div class="line">    <span class="keyword">if</span> (sh == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    sh-&gt;len = initlen;</div><div class="line">    sh-&gt;<span class="built_in">free</span> = <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span> (initlen &amp;&amp; init) &#123;</div><div class="line">      <span class="built_in">memcpy</span>(sh-&gt;buf, init, initlen); <span class="comment">// 把字符串拷贝到结构体之后</span></div><div class="line">    &#125;</div><div class="line">    sh-&gt;buf[initlen] = <span class="string">'\0'</span>; <span class="comment">// 最后一个字节放控制符</span></div><div class="line">    <span class="keyword">return</span> (<span class="keyword">char</span>*)sh-&gt;buf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>动态字符串在最后一位存放控制符, 主要目标是可以利用c语言字符串处理函数处理sdshdr-&gt;buf</p>
-<h3 id="动态字符串优势"><a href="#动态字符串优势" class="headerlink" title="动态字符串优势"></a>动态字符串优势</h3><ul>
-<li>动态字符串获取长度快, 普通字符串获取长度要遍历一遍, 时间复杂度O(N)</li>
-<li>动态字符串可以惰性释放, 一定程度上避免内存的重新分配, 当字符串变短的时候, 动态字符串空间大小不变动, 只是改free值<br>当字符串重新变长的时候, 动态数组可能不需要扩大空间就可以存储这个字符串, 有一定的伸缩空间</li>
-<li>字符串二进制安全, 可以在字符串内部存’\0’</li>
+        <h3 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h3><p>聊跨域之前不得不说同源策略, 同源策略是浏览器的一种安全机制, 不同源的客户端脚本在没有明确授权的情况下, 不能读写对方资源. 所以a.com下的js脚本采用ajax读取不到b.com里面的文件数据. 所谓同源是指, 域名, 协议类型/版本, 端口都要相同.</p>
+<h3 id="跨域解决方式"><a href="#跨域解决方式" class="headerlink" title="跨域解决方式"></a>跨域解决方式</h3><h4 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h4><p>  在a脚本里面GET方式请求b站点上的js文件, 同时把回调函数传过去, 数据其实在b站点的那个js文件里面, 执行回调函数的时候带过来.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> url = <span class="string">'http://b.com/main.js?callback=foo'</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(data.name+<span class="string">"欢迎您"</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="跨域资源共享-CORS"><a href="#跨域资源共享-CORS" class="headerlink" title="跨域资源共享(CORS)"></a>跨域资源共享(CORS)</h4><p>浏览器为了保护b站点, 不允许在a站点的脚本中ajax请求b站点的资源, 如果现在a, b站点都是我们自己的, 或者b站点就是想让a站点请求, 那么b站点就要告诉浏览器, 我运行a站点跨域请求, 请你放行.</p>
+<p>如果浏览器认为请求b站点的这次请求是简单请求, 不会发送一次额外的请求方式为options的http请求, 这样只需在代码里面加上响应头就行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">'Access-Control-Allow-Origin:http://www.a.com'</span>);  </div><div class="line">header(<span class="string">'Access-Control-Allow-Methods:POST'</span>);  </div><div class="line">header(<span class="string">'Access-Control-Allow-Headers:x-requested-with,content-type'</span>);</div></pre></td></tr></table></figure>
+<p>如果浏览器判断不是简单请求, 就会在请求之前预请求一次(options请求方式), 这个时候我们可以在服务端软件(eg: nginx)里面加上判断如果是options请求方式, 就返回响应头, 告诉浏览器服务端允许哪个源跨域请求(add_header Access-Control-Allow-Origin a.com);</p>
+<p><b>那怎么判断是不是简单请求呢？</b></p>
+<p>简单请求以下三项必须都成立:</p>
+<ul>
+<li>只能是Get、Head、Post方法</li>
+<li>除了浏览器自己在Http头上加的信息（如Connection、User-Agent），开发者只能加这几个：Accept、Accept-Language、Content-Type、…</li>
+<li>Content-Type只能取这几个值：<br>application/x-www-form-urlencoded<br>multipart/form-data<br>text/plain</li>
 </ul>
+<p>我们有个项目需要在请求头里面带token, 结果就不是简单请求了, 登录(没有带token)接口就简单请求, 亲测有效</p>
 
       
     </div>
@@ -392,7 +394,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/sds/" rel="tag"># sds</a>
+            <a href="/tags/跨域/" rel="tag"># 跨域</a>
           
         </div>
       
@@ -405,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/20/如何限制服务器最大并发数/" rel="next" title="如何限制服务器最大并发数">
-                <i class="fa fa-chevron-left"></i> 如何限制服务器最大并发数
+              <a href="/2018/03/26/redis-hashTable渐进式rehash/" rel="next" title="redis hashTable渐进式rehash">
+                <i class="fa fa-chevron-left"></i> redis hashTable渐进式rehash
               </a>
             
           </div>
@@ -414,10 +416,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/22/redis-sdstrim/" rel="prev" title="redis sdstrim">
-                redis sdstrim <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -549,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态字符串"><span class="nav-number">1.</span> <span class="nav-text">动态字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#申请动态字符串"><span class="nav-number">2.</span> <span class="nav-text">申请动态字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态字符串优势"><span class="nav-number">3.</span> <span class="nav-text">动态字符串优势</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#同源策略"><span class="nav-number">1.</span> <span class="nav-text">同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨域解决方式"><span class="nav-number">2.</span> <span class="nav-text">跨域解决方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jsonp"><span class="nav-number">2.1.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域资源共享-CORS"><span class="nav-number">2.2.</span> <span class="nav-text">跨域资源共享(CORS)</span></a></li></ol></li></ol></div>
             
 
           </div>
