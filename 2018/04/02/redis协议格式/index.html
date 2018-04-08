@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="自定义协议," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="title: redis协议格式date: 2018-04-02 17:26:36tags: 自定义协议categories:  redis  自定义应用层的协议是很常见的, 这里我简述一下redis的, 后面会附上我们生产环境的一段代码 base客户端在应用层拼接好请求字符串, 然后发到传输层, 服务端传输层接到的数据也是字符串, 但是传输层TCP协议是字节流协议, 传输的东西像流水一样, 无">
+<meta name="description" content="自定义应用层的协议是很常见的, 这里我简述一下redis的, 后面会附上我们生产环境的一段代码 base客户端在应用层拼接好请求字符串, 然后发到传输层, 服务端传输层接到的数据也是字符串, 但是传输层TCP协议是字节流协议, 传输的东西像流水一样, 无法分清两次数据包之间的界限, 所以我们要在应用层自己实现分包, 比如http协议, 请求行结束用\r\n结束, 请求头每个key: value对用">
+<meta name="keywords" content="自定义协议">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Thomas&#39;s blog">
+<meta property="og:title" content="redis协议格式">
 <meta property="og:url" content="http://yoursite.com/2018/04/02/redis协议格式/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
-<meta property="og:description" content="title: redis协议格式date: 2018-04-02 17:26:36tags: 自定义协议categories:  redis  自定义应用层的协议是很常见的, 这里我简述一下redis的, 后面会附上我们生产环境的一段代码 base客户端在应用层拼接好请求字符串, 然后发到传输层, 服务端传输层接到的数据也是字符串, 但是传输层TCP协议是字节流协议, 传输的东西像流水一样, 无">
+<meta property="og:description" content="自定义应用层的协议是很常见的, 这里我简述一下redis的, 后面会附上我们生产环境的一段代码 base客户端在应用层拼接好请求字符串, 然后发到传输层, 服务端传输层接到的数据也是字符串, 但是传输层TCP协议是字节流协议, 传输的东西像流水一样, 无法分清两次数据包之间的界限, 所以我们要在应用层自己实现分包, 比如http协议, 请求行结束用\r\n结束, 请求头每个key: value对用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-02T10:17:50.227Z">
+<meta property="og:updated_time" content="2018-04-02T10:19:46.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Thomas&#39;s blog">
-<meta name="twitter:description" content="title: redis协议格式date: 2018-04-02 17:26:36tags: 自定义协议categories:  redis  自定义应用层的协议是很常见的, 这里我简述一下redis的, 后面会附上我们生产环境的一段代码 base客户端在应用层拼接好请求字符串, 然后发到传输层, 服务端传输层接到的数据也是字符串, 但是传输层TCP协议是字节流协议, 传输的东西像流水一样, 无">
+<meta name="twitter:title" content="redis协议格式">
+<meta name="twitter:description" content="自定义应用层的协议是很常见的, 这里我简述一下redis的, 后面会附上我们生产环境的一段代码 base客户端在应用层拼接好请求字符串, 然后发到传输层, 服务端传输层接到的数据也是字符串, 但是传输层TCP协议是字节流协议, 传输的东西像流水一样, 无法分清两次数据包之间的界限, 所以我们要在应用层自己实现分包, 比如http协议, 请求行结束用\r\n结束, 请求头每个key: value对用">
 
 
 
@@ -125,7 +126,7 @@
 
 
 
-  <title> | Thomas's blog</title>
+  <title>redis协议格式 | Thomas's blog</title>
   
 
 
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">redis协议格式</h1>
         
 
         <div class="post-meta">
@@ -311,6 +312,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -339,12 +362,7 @@
       
 
       
-        <hr>
-<p>title: redis协议格式<br>date: 2018-04-02 17:26:36<br>tags: 自定义协议<br>categories:</p>
-<ul>
-<li>redis</li>
-</ul>
-<p>自定义应用层的协议是很常见的, 这里我简述一下redis的, 后面会附上我们生产环境的一段代码</p>
+        <p>自定义应用层的协议是很常见的, 这里我简述一下redis的, 后面会附上我们生产环境的一段代码</p>
 <h3 id="base"><a href="#base" class="headerlink" title="base"></a>base</h3><p>客户端在应用层拼接好请求字符串, 然后发到传输层, 服务端传输层接到的数据也是字符串, 但是传输层TCP协议是字节流协议, 传输的东西像流水一样, 无法分清两次数据包之间的界限, 所以我们要在应用层自己实现分包, 比如http协议, 请求行结束用\r\n结束, 请求头每个key: value对用\r\n连接, 请求头结束用两个\r\n, 如果有请求体, 则在请求头中定义content-Length, 这样在取完请求头之后, 再取content-Length长度, 这样就剥离出来一次完整的请求.</p>
 <h3 id="redis协议"><a href="#redis协议" class="headerlink" title="redis协议:"></a>redis协议:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">SETBIT is_here 2 1</div><div class="line"></div><div class="line">*&lt;参数数量&gt; CR LF</div><div class="line">$&lt;参数 1 的字节数量&gt; CR LF</div><div class="line">&lt;参数 1 的数据&gt; CR LF</div><div class="line">...</div><div class="line">$&lt;参数 N 的字节数量&gt; CR LF</div><div class="line">&lt;参数 N 的数据&gt; CR LF</div><div class="line"></div><div class="line">eg: &quot;*4\r\n$6\r\nSETBIT\r\n$7\r\nis_here\r\n$1\r\n2\r\n$1\r\n1\r\n&quot;</div><div class="line"></div><div class="line">*4</div><div class="line">$6</div><div class="line">SETBIT</div><div class="line">$7</div><div class="line">is_here</div><div class="line">$1</div><div class="line">2</div><div class="line">$1</div><div class="line">1</div></pre></td></tr></table></figure>
 <h3 id="php实现拼接请求字符串"><a href="#php实现拼接请求字符串" class="headerlink" title="php实现拼接请求字符串"></a>php实现拼接请求字符串</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$s = <span class="string">'*'</span> . count($command) . <span class="string">"\r\n"</span>;</div><div class="line"><span class="keyword">foreach</span> ($command <span class="keyword">as</span> $m) &#123;</div><div class="line">    $s .= <span class="string">'$'</span> . strlen($m) . <span class="string">"\r\n"</span>;</div><div class="line">    $s .= $m . <span class="string">"\r\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -362,6 +380,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义协议/" rel="tag"># 自定义协议</a>
+          
+        </div>
       
 
       
@@ -457,7 +481,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -479,7 +503,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
