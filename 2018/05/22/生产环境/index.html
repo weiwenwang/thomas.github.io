@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="Overview  工欲善其事必先利其器, 没有一个发达的生产系统, 极大的影响开发, 测试, 定位问题, 解决问题的效率, 下面就说说我所在的公司的生产环境. 包括：代码的版本控制，日常生产开发环境。由于每个公司的行业不同，情况不同，对开发人员开放的权限也不同。 Git, Gitflow合作  很多团队可能有十几个人开发同一个项目, 但是他们的git使用还是很初级, 以前在面试的时候, 被问到现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="article title">
-<meta property="og:url" content="http://yoursite.com/2017/09/09/article-title/index.html">
+<meta property="og:title" content="生产环境">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/生产环境/index.html">
 <meta property="og:site_name" content="Thomas&#39;s blog">
+<meta property="og:description" content="Overview  工欲善其事必先利其器, 没有一个发达的生产系统, 极大的影响开发, 测试, 定位问题, 解决问题的效率, 下面就说说我所在的公司的生产环境. 包括：代码的版本控制，日常生产开发环境。由于每个公司的行业不同，情况不同，对开发人员开放的权限也不同。 Git, Gitflow合作  很多团队可能有十几个人开发同一个项目, 但是他们的git使用还是很初级, 以前在面试的时候, 被问到现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-09T14:58:25.000Z">
+<meta property="og:updated_time" content="2018-05-22T10:13:06.964Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="article title">
+<meta name="twitter:title" content="生产环境">
+<meta name="twitter:description" content="Overview  工欲善其事必先利其器, 没有一个发达的生产系统, 极大的影响开发, 测试, 定位问题, 解决问题的效率, 下面就说说我所在的公司的生产环境. 包括：代码的版本控制，日常生产开发环境。由于每个公司的行业不同，情况不同，对开发人员开放的权限也不同。 Git, Gitflow合作  很多团队可能有十几个人开发同一个项目, 但是他们的git使用还是很初级, 以前在面试的时候, 被问到现">
 
 
 
@@ -116,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/09/article-title/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/生产环境/"/>
 
 
 
 
 
-  <title>article title | Thomas's blog</title>
+  <title>生产环境 | Thomas's blog</title>
   
 
 
@@ -269,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/09/article-title/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/生产环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="thomas">
@@ -286,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">article title</h1>
+          <h1 class="post-title" itemprop="name headline">生产环境</h1>
         
 
         <div class="post-meta">
@@ -298,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T22:58:25+08:00">
-                2017-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T10:56:48+08:00">
+                2018-05-22
               </time>
             
 
@@ -336,7 +339,25 @@
       
 
       
-        
+        <h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>  工欲善其事必先利其器, 没有一个发达的生产系统, 极大的影响开发, 测试, 定位问题, 解决问题的效率, 下面就说说我所在的公司的生产环境. 包括：代码的版本控制，日常生产开发环境。由于每个公司的行业不同，情况不同，对开发人员开放的权限也不同。</p>
+<h3 id="Git-Gitflow合作"><a href="#Git-Gitflow合作" class="headerlink" title="Git, Gitflow合作"></a>Git, Gitflow合作</h3><p>  很多团队可能有十几个人开发同一个项目, 但是他们的git使用还是很初级, 以前在面试的时候, 被问到现在团队的分支是如何命名的, 我当时就觉得他是真的懂的人, 这个问题可以反映很多问题, 真的是一针见血.<br>  每个工程都应该有一个master分支, 上线当然也只能上这个分支, 一般还会分成两类, fix/ , feature/,<br>  很多公司有bug系统, 每个bug都会有一个唯一ID, 可以把这样命名fix/bug_100, feature/weichat_log,<br>  正确的分支是应该是根据功能来开的,</p>
+<h3 id="lab环境："><a href="#lab环境：" class="headerlink" title="lab环境："></a>lab环境：</h3><ul>
+<li>工程师在自己的电脑搭建php + nginx/apache</li>
+<li>工程师pc配置host把域名解析到本机</li>
+<li>公司内网搭建mysql，mongodb，redis，memcache服务器</li>
+<li>lab环境主要方便工程师在开发阶段调试</li>
+</ul>
+<h3 id="staging环境"><a href="#staging环境" class="headerlink" title="staging环境"></a>staging环境</h3><p>每个公司的叫法不一样, 有的叫alpha/beta, 这个staging可能是借用了git的暂存区, 上线前的中转区.</p>
+<ul>
+<li><p>撘一台服务器，配置N个虚拟机(eg:50个, 这个具体要看这个项目有多少人开发, 每个人同时进行多少功能), 配置每个虚拟机的访问域名对应，staging1-50.xxx.com, 指定默认的入口文件index_staging.php,保证走staging的配置文件。每个工程师分配几个staging(预留几个staging,以备不时之需), 工程师在上线之前，或者合并develop分支之前，可以把自己的分支发到自己的staging上面测试一下.</p>
+</li>
+<li><p>staging的连接的数据库，缓存都是线上的，方便开发者查看效果(线上数据比较全), 这个staging相当于预发布环境所以操作要谨慎(特别是写操作), 开发人员在这里看到的效果基本上一定是上线之后用户看到的效果了.</p>
+</li>
+</ul>
+<h3 id="pro环境"><a href="#pro环境" class="headerlink" title="pro环境"></a>pro环境</h3><p>正式的线上环境,</p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><h4 id="部署到staging环境"><a href="#部署到staging环境" class="headerlink" title="部署到staging环境"></a>部署到staging环境</h4><p>使用ssh登录到部署机，到达相应目录，git checkout your_branch_name &amp;&amp; git pull ,然后执行部署脚本，把本地的代码SCP到服务器，然后，重启staging机器的php-fpm(为什么要重启呢)</p>
+<h4 id="部署到线上"><a href="#部署到线上" class="headerlink" title="部署到线上"></a>部署到线上</h4><p>和上面差不多，主要是执行不同的部署脚本, 这里注意最为重要的就是线上只能发master, 如果是新功能</p>
+
       
     </div>
     
@@ -360,8 +381,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/09/testd2/" rel="next" title="mysql-存储1">
-                <i class="fa fa-chevron-left"></i> mysql-存储1
+              <a href="/2018/05/07/数据链路层三个基本问题/" rel="next" title="数据链路层三个基本问题">
+                <i class="fa fa-chevron-left"></i> 数据链路层三个基本问题
               </a>
             
           </div>
@@ -370,8 +391,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/03/webbench源码分析(一)/" rel="prev" title="webbench源码分析(一)">
-                webbench源码分析(一) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/11/删除单向链表当前节点/" rel="prev" title="删除单向链表当前节点(O(1))">
+                删除单向链表当前节点(O(1)) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -424,8 +445,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -485,6 +515,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Gitflow合作"><span class="nav-number">2.</span> <span class="nav-text">Git, Gitflow合作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lab环境："><span class="nav-number">3.</span> <span class="nav-text">lab环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#staging环境"><span class="nav-number">4.</span> <span class="nav-text">staging环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pro环境"><span class="nav-number">5.</span> <span class="nav-text">pro环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">6.</span> <span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#部署到staging环境"><span class="nav-number">6.1.</span> <span class="nav-text">部署到staging环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署到线上"><span class="nav-number">6.2.</span> <span class="nav-text">部署到线上</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
