@@ -88,7 +88,9 @@
 <meta property="og:description" content="Tcp/Udp介绍Tcp是字节流协议, 数据传输像流水一样没有边界, 那么对等方在一次数据读取后,无法分辨读取是一个消息还是多个，或者是不足一个, 那么对等方拿到”残缺”消息就不知道如何处理. Udp是基于消息的传输服务，每个消息就是一个报文，是有边界的，对等方每次接收都是一个完整的消息.这样就需要我们在应用层,自己来区分. 粘包是如何出现的? 用户进程write消息, 但内核缓存区不足以容乃这个">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/11/15/5bed7f16bfa3c.png">
-<meta property="og:updated_time" content="2018-11-16T09:29:56.403Z">
+<meta property="og:image" content="https://i.loli.net/2018/11/16/5bee907d09557.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/16/5bee907d292ad.png">
+<meta property="og:updated_time" content="2018-11-20T05:46:11.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义协议&#x2F;解决tcp粘包问题(golang版本)">
 <meta name="twitter:description" content="Tcp/Udp介绍Tcp是字节流协议, 数据传输像流水一样没有边界, 那么对等方在一次数据读取后,无法分辨读取是一个消息还是多个，或者是不足一个, 那么对等方拿到”残缺”消息就不知道如何处理. Udp是基于消息的传输服务，每个消息就是一个报文，是有边界的，对等方每次接收都是一个完整的消息.这样就需要我们在应用层,自己来区分. 粘包是如何出现的? 用户进程write消息, 但内核缓存区不足以容乃这个">
@@ -380,6 +382,10 @@
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 读取消息, 可导出的方法</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(buffer *Buffer)</span> <span class="title">Read</span><span class="params">(msg <span class="keyword">chan</span> <span class="keyword">string</span>)</span> <span class="params">(error)</span></span> &#123;</div><div class="line">    <span class="keyword">for</span> &#123;</div><div class="line">        buffer.grow()                     <span class="comment">// 移动数据</span></div><div class="line">        _, err := buffer.readFromReader() <span class="comment">// 读数据拼接到定额缓存后面</span></div><div class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">            fmt.Println(err)</div><div class="line">            <span class="keyword">return</span> err</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 检查定额缓存里面的数据有几个消息(可能不到1个，可能连一个消息头都不够，可能有几个完整消息+一个消息的部分)</span></div><div class="line">        isBreak := buffer.checkMsg(msg)</div><div class="line">        <span class="comment">// 只要读到有完整的消息, isBreak就为true, 跳出去处理</span></div><div class="line">        <span class="keyword">if</span> (isBreak) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// grow 将有用的字节前移, 不可导出</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Buffer)</span> <span class="title">grow</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">if</span> b.start == <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">copy</span>(b.buf, b.buf[b.start:b.end])</div><div class="line">    b.end -= b.start</div><div class="line">    b.start = <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 检查应用层缓存区是否包含完整的消息, 不可导出</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(buffer *Buffer)</span> <span class="title">checkMsg</span><span class="params">(msg <span class="keyword">chan</span> <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">bool</span>)</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> isBreak <span class="keyword">bool</span></div><div class="line">    HEADER_LENG := HEAD_SIZE + <span class="built_in">len</span>(buffer.header)</div><div class="line">    headBuf, err1 := buffer.seek(HEADER_LENG)</div><div class="line">    <span class="keyword">if</span> err1 != <span class="literal">nil</span> &#123; <span class="comment">// 一个消息头都不够， 跳出去继续读吧</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">string</span>(headBuf[:<span class="built_in">len</span>(buffer.header)]) == buffer.header) &#123; <span class="comment">// 判断消息头正确性</span></div><div class="line"></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    contentSize := <span class="keyword">int</span>(binary.BigEndian.Uint16(headBuf[<span class="built_in">len</span>(buffer.header):]))</div><div class="line">    <span class="keyword">if</span> (buffer.<span class="built_in">len</span>() &gt;= contentSize-HEADER_LENG) &#123; <span class="comment">// 一个消息体也是够的</span></div><div class="line">        contentBuf := buffer.read(HEADER_LENG, contentSize) <span class="comment">// 把消息读出来，把start往后移</span></div><div class="line">        msg &lt;- <span class="keyword">string</span>(contentBuf)</div><div class="line">        <span class="comment">// 递归，看剩下的还够一个消息不</span></div><div class="line">        isBreak = <span class="literal">true</span></div><div class="line">        buffer.checkMsg(msg)</div><div class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 一个消息体不够的， 跳出去继续读吧</span></div><div class="line">        isBreak = <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> isBreak</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">go</span> get github.com/weiwenwang/DiyProtocol</div><div class="line"></div><div class="line">cd $GOPATH/github.com/weiwenwang/DiyProtocol/example/server/</div><div class="line"></div><div class="line"><span class="keyword">go</span> run server.<span class="keyword">go</span></div></pre></td></tr></table></figure>
+<p><a href="https://asciinema.org/a/j146eF0OYuaNpOWP9qgIyspoV" target="_blank" rel="external"><img src="https://i.loli.net/2018/11/16/5bee907d09557.png" alt="server"></a></p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd $GOPATH/github.com/weiwenwang/DiyProtocol/example/client/</div><div class="line"></div><div class="line"><span class="keyword">go</span> run client.<span class="keyword">go</span></div></pre></td></tr></table></figure>
+<p><a href="https://asciinema.org/a/MFLd5a8t1ULrDnvj1m624DAaS" target="_blank" rel="external"><img src="https://i.loli.net/2018/11/16/5bee907d292ad.png" alt="client"></a></p>
 <h3 id="详情"><a href="#详情" class="headerlink" title="详情"></a>详情</h3><p>源码请移步: <a href="https://github.com/weiwenwang/DiyProtocol" target="_blank" rel="external">github</a>, 本人附上一个demo, 代码注释详细.</p>
 
       
@@ -420,6 +426,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/28/NginxPhpDocker/" rel="prev" title="NginxPhpDocker">
+                NginxPhpDocker <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -496,7 +506,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -507,7 +517,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -551,7 +561,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tcp-Udp介绍"><span class="nav-number">1.</span> <span class="nav-text">Tcp/Udp介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粘包是如何出现的"><span class="nav-number">2.</span> <span class="nav-text">粘包是如何出现的?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定长消息"><span class="nav-number">2.1.</span> <span class="nav-text">1. 定长消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-特殊标志作为结束标志"><span class="nav-number">2.2.</span> <span class="nav-text">2. 特殊标志作为结束标志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-定长的包头-变长的包体-包头中写入包体的长度-本文主要介绍这种方式"><span class="nav-number">2.3.</span> <span class="nav-text">3. 定长的包头 + 变长的包体, 包头中写入包体的长度, 本文主要介绍这种方式:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详情"><span class="nav-number">4.</span> <span class="nav-text">详情</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tcp-Udp介绍"><span class="nav-number">1.</span> <span class="nav-text">Tcp/Udp介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粘包是如何出现的"><span class="nav-number">2.</span> <span class="nav-text">粘包是如何出现的?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定长消息"><span class="nav-number">2.1.</span> <span class="nav-text">1. 定长消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-特殊标志作为结束标志"><span class="nav-number">2.2.</span> <span class="nav-text">2. 特殊标志作为结束标志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-定长的包头-变长的包体-包头中写入包体的长度-本文主要介绍这种方式"><span class="nav-number">2.3.</span> <span class="nav-text">3. 定长的包头 + 变长的包体, 包头中写入包体的长度, 本文主要介绍这种方式:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#演示"><span class="nav-number">4.</span> <span class="nav-text">演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详情"><span class="nav-number">5.</span> <span class="nav-text">详情</span></a></li></ol></div>
             
 
           </div>
@@ -571,7 +581,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
