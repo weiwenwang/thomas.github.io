@@ -86,10 +86,15 @@
 <meta property="og:site_name" content="Thomas&#39;s blog">
 <meta property="og:description" content="NginxPhpDocker是什么, 主要解决什么问题基于docker, 快速搭建Nginx+Php本地开发环境(已含常用PHP扩展), nginx、php配置文件和php工程代码都在宿主机上, 方便修改. 可以解决:  新人加入团队, 配置LNMP麻烦, 而且是重复劳动 prod, staging, local开发环境不一致, local没问题, 上了staging,prod出现各种问题 php">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-28T02:36:34.301Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/28/5c9c36453f75e.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/28/5c9c36452cb09.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/28/5c9c36454b755.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/28/5c9c389f4a322.png">
+<meta property="og:updated_time" content="2019-03-28T03:15:12.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NginxPhpDocker">
 <meta name="twitter:description" content="NginxPhpDocker是什么, 主要解决什么问题基于docker, 快速搭建Nginx+Php本地开发环境(已含常用PHP扩展), nginx、php配置文件和php工程代码都在宿主机上, 方便修改. 可以解决:  新人加入团队, 配置LNMP麻烦, 而且是重复劳动 prod, staging, local开发环境不一致, local没问题, 上了staging,prod出现各种问题 php">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/28/5c9c36453f75e.png">
 
 
 
@@ -361,7 +366,7 @@
       
 
       
-        <h3 id="NginxPhpDocker是什么-主要解决什么问题"><a href="#NginxPhpDocker是什么-主要解决什么问题" class="headerlink" title="NginxPhpDocker是什么, 主要解决什么问题"></a>NginxPhpDocker是什么, 主要解决什么问题</h3><p>基于docker, 快速搭建Nginx+Php本地开发环境(已含常用PHP扩展), nginx、php配置文件和php工程代码都在宿主机上, 方便修改.</p>
+        <h2 id="NginxPhpDocker是什么-主要解决什么问题"><a href="#NginxPhpDocker是什么-主要解决什么问题" class="headerlink" title="NginxPhpDocker是什么, 主要解决什么问题"></a>NginxPhpDocker是什么, 主要解决什么问题</h2><p>基于docker, 快速搭建Nginx+Php本地开发环境(已含常用PHP扩展), nginx、php配置文件和php工程代码都在宿主机上, 方便修改.</p>
 <p>可以解决:</p>
 <ul>
 <li>新人加入团队, 配置LNMP麻烦, 而且是重复劳动</li>
@@ -376,7 +381,9 @@
 <li>1.2, 1.3的两个指令必须在NginxPhpDocker目录下执行</li>
 <li>PHP代码的文件夹, 必须挂在到PHP容器里面, 有小伙伴使用的时候挂到nginx容器里面了, nginx和PHP俩容器是隔离的, php只会按地址在他们自己的容器里面找文件, 和nginx只是通过fastcgi通信, nginx告诉php用户请求的文件地址, php在自己的容器去找对应的文件</li>
 </ul>
+<h4 id="1-5-执行1-2、1-3之后效果是什么样子的呢"><a href="#1-5-执行1-2、1-3之后效果是什么样子的呢" class="headerlink" title="1.5 执行1.2、1.3之后效果是什么样子的呢?"></a>1.5 执行1.2、1.3之后效果是什么样子的呢?</h4><p><img src="https://i.loli.net/2019/03/28/5c9c36453f75e.png" alt="446601B2-F933-40F1-8588-AC9F3F26E17E.png"><br><img src="https://i.loli.net/2019/03/28/5c9c36452cb09.png" alt="602C7C2D-5793-4805-BE64-1B8EDA958CB0.png"><br><img src="https://i.loli.net/2019/03/28/5c9c36454b755.png" alt="2240481F-4CC0-48C8-B6BA-398A26B8A938.png"></p>
 <h3 id="3-如何把现有的项目跑起来呢？"><a href="#3-如何把现有的项目跑起来呢？" class="headerlink" title="3. 如何把现有的项目跑起来呢？"></a>3. 如何把现有的项目跑起来呢？</h3><p>  这里我举例个例子， 假如我们现在的项目(thinkphp_3.2.3_full)就是thinkphp框架写的, 我如何把它运行起来呢?<br>  第一步: 把代码放在www/example/目录下<br>  第二步: 添加配置文件nginx-conf/conf.d/example-thinkphp.conf, 剩下的就是单纯的nginx配置问题了.<br>  本地做一个host绑定: “127.0.0.1 thinkphp-full.com”<br>  浏览器访问: <a href="http://thinkphp-full.com/index.php?c=index&amp;a=index" target="_blank" rel="external">http://thinkphp-full.com/index.php?c=index&amp;a=index</a></p>
+<p><img src="https://i.loli.net/2019/03/28/5c9c389f4a322.png" alt="A40B8438-28B1-4023-BC42-FE28E435F724.png"></p>
 <h3 id="4-wangnan188-nginx-php-docker现在包含了哪些extension呢"><a href="#4-wangnan188-nginx-php-docker现在包含了哪些extension呢" class="headerlink" title="4. wangnan188/nginx-php-docker现在包含了哪些extension呢?"></a>4. wangnan188/nginx-php-docker现在包含了哪些extension呢?</h3><table>
 <thead>
 <tr>
@@ -671,7 +678,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="5-详情"><a href="#5-详情" class="headerlink" title="5. 详情"></a>5. 详情</h3><p>源码请移步: <a href="https://github.com/weiwenwang/NginxPhpDocker" target="_blank" rel="external">github</a>, 本人附上一个demo, 代码注释详细.</p>
+<h3 id="5-其他"><a href="#5-其他" class="headerlink" title="5. 其他"></a>5. 其他</h3><p>后续php extensions有补充, 可能不能及时更新此文章, 最新版本请移步: <a href="https://github.com/weiwenwang/NginxPhpDocker" target="_blank" rel="external">github</a></p>
 
       
     </div>
@@ -836,7 +843,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NginxPhpDocker是什么-主要解决什么问题"><span class="nav-number">1.</span> <span class="nav-text">NginxPhpDocker是什么, 主要解决什么问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-如何使用呢"><span class="nav-number">2.</span> <span class="nav-text">1. 如何使用呢?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-download-code"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 download code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-启动php容器"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 启动php容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-启动nginx容器"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 启动nginx容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-注意事项，-非常重要"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 注意事项， 非常重要</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-如何把现有的项目跑起来呢？"><span class="nav-number">3.</span> <span class="nav-text">3. 如何把现有的项目跑起来呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-wangnan188-nginx-php-docker现在包含了哪些extension呢"><span class="nav-number">4.</span> <span class="nav-text">4. wangnan188/nginx-php-docker现在包含了哪些extension呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-详情"><span class="nav-number">5.</span> <span class="nav-text">5. 详情</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NginxPhpDocker是什么-主要解决什么问题"><span class="nav-number">1.</span> <span class="nav-text">NginxPhpDocker是什么, 主要解决什么问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-如何使用呢"><span class="nav-number">1.1.</span> <span class="nav-text">1. 如何使用呢?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-download-code"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 download code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-启动php容器"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 启动php容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-启动nginx容器"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 启动nginx容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-注意事项，-非常重要"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 注意事项， 非常重要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-执行1-2、1-3之后效果是什么样子的呢"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5 执行1.2、1.3之后效果是什么样子的呢?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-如何把现有的项目跑起来呢？"><span class="nav-number">1.2.</span> <span class="nav-text">3. 如何把现有的项目跑起来呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-wangnan188-nginx-php-docker现在包含了哪些extension呢"><span class="nav-number">1.3.</span> <span class="nav-text">4. wangnan188/nginx-php-docker现在包含了哪些extension呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-其他"><span class="nav-number">1.4.</span> <span class="nav-text">5. 其他</span></a></li></ol></li></ol></div>
             
 
           </div>
