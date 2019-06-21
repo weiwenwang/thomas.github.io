@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="微服务,服务注册发现," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="go-micro-微服务框架 启动etcdv3集群这里我用两台机器三个节点([192.168.3.45:2379, 192.168.3.45:2479],  [192.168.3.118:2379]) node112345678etcd --name cd0 \--initial-advertise-peer-urls http://192.168.3.45:2380 \--listen-peer">
+<meta name="keywords" content="微服务,服务注册发现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go-micro">
+<meta property="og:url" content="http://yoursite.com/2019/04/01/go-micro/index.html">
+<meta property="og:site_name" content="Thomas&#39;s blog">
+<meta property="og:description" content="go-micro-微服务框架 启动etcdv3集群这里我用两台机器三个节点([192.168.3.45:2379, 192.168.3.45:2479],  [192.168.3.118:2379]) node112345678etcd --name cd0 \--initial-advertise-peer-urls http://192.168.3.45:2380 \--listen-peer">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/06/19/5d09fbb10b5c556537.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0ca52a667dd46348.png">
+<meta property="og:updated_time" content="2019-06-21T10:22:46.605Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="go-micro">
+<meta name="twitter:description" content="go-micro-微服务框架 启动etcdv3集群这里我用两台机器三个节点([192.168.3.45:2379, 192.168.3.45:2479],  [192.168.3.118:2379]) node112345678etcd --name cd0 \--initial-advertise-peer-urls http://192.168.3.45:2380 \--listen-peer">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/19/5d09fbb10b5c556537.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/01/go-micro/"/>
+
+
+
+
+
+  <title>go-micro | Thomas's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Thomas's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-address-book"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-hourglass"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/01/go-micro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="thomas">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Thomas's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">go-micro</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-01T22:46:22+08:00">
+                2019-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GO/" itemprop="url" rel="index">
+                    <span itemprop="name">GO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>go-micro-微服务框架</p>
+<h3 id="启动etcdv3集群"><a href="#启动etcdv3集群" class="headerlink" title="启动etcdv3集群"></a>启动etcdv3集群</h3><p>这里我用两台机器三个节点([192.168.3.45:2379, 192.168.3.45:2479],  [192.168.3.118:2379])</p>
+<h4 id="node1"><a href="#node1" class="headerlink" title="node1"></a>node1</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">etcd --name cd0 \</div><div class="line">--initial-advertise-peer-urls http://192.168.3.45:2380 \</div><div class="line">--listen-peer-urls http://192.168.3.45:2380 \</div><div class="line">--listen-client-urls http://192.168.3.45:2379 \</div><div class="line">--advertise-client-urls http://192.168.3.45:2379 \</div><div class="line">--initial-cluster-token etcd-cluster-1 \</div><div class="line">--initial-cluster cd0=http://192.168.3.45:2380,cd1=http://192.168.3.45:2480,cd2=http://192.168.3.118:2380 \</div><div class="line">--initial-cluster-state new</div></pre></td></tr></table></figure>
+<h4 id="node2"><a href="#node2" class="headerlink" title="node2"></a>node2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">etcd --name cd1 \</div><div class="line">--initial-advertise-peer-urls http://192.168.3.45:2480 \</div><div class="line">--listen-peer-urls http://192.168.3.45:2480 \</div><div class="line">--listen-client-urls http://192.168.3.45:2479 \</div><div class="line">--advertise-client-urls http://192.168.3.45:2479 \</div><div class="line">--initial-cluster-token etcd-cluster-1 \</div><div class="line">--initial-cluster cd0=http://192.168.3.45:2380,cd1=http://192.168.3.45:2480,cd2=http://192.168.3.118:2380 \</div><div class="line">--initial-cluster-state new</div></pre></td></tr></table></figure>
+<h4 id="node3"><a href="#node3" class="headerlink" title="node3"></a>node3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">etcd --name cd2 \</div><div class="line">--initial-advertise-peer-urls http://192.168.3.118:2380 \</div><div class="line">--listen-peer-urls http://192.168.3.118:2380 \</div><div class="line">--listen-client-urls http://192.168.3.118:2379 \</div><div class="line">--advertise-client-urls http://192.168.3.118:2379 \</div><div class="line">--initial-cluster-token etcd-cluster-1 \</div><div class="line">--initial-cluster cd0=http://192.168.3.45:2380,cd1=http://192.168.3.45:2480,cd2=http://192.168.3.118:2380 \</div><div class="line">--initial-cluster-state new</div></pre></td></tr></table></figure>
+<h4 id="测试etcd集群是否正常"><a href="#测试etcd集群是否正常" class="headerlink" title="测试etcd集群是否正常"></a>测试etcd集群是否正常</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">thomasdeMacBook-Pro:~ www1$ etcdctl --endpoints=&quot;http://192.168.3.45:2379&quot; endpoint health</div><div class="line">http://192.168.3.45:2379 is healthy: successfully committed proposal: took = 24.957199ms</div><div class="line"></div><div class="line">thomasdeMacBook-Pro:~ www1$ etcdctl --endpoints=&quot;http://192.168.3.45:2479&quot; endpoint health</div><div class="line">http://192.168.3.45:2479 is healthy: successfully committed proposal: took = 19.160559ms</div><div class="line"></div><div class="line">thomasdeMacBook-Pro:~ www1$ etcdctl --endpoints=&quot;http://192.168.3.118:2379&quot; endpoint health</div><div class="line">http://192.168.3.118:2379 is healthy: successfully committed proposal: took = 27.850165ms</div></pre></td></tr></table></figure>
+<h3 id="micro安装etcd插件"><a href="#micro安装etcd插件" class="headerlink" title="micro安装etcd插件"></a>micro安装etcd插件</h3><p>在$GOPATH/src/github.com/micro/micro 下新建plugins.go</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">    _ &quot;github.com/micro/go-plugins/registry/etcdv3&quot;</div><div class="line">)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ go build -i -o micro ./main.go ./plugins.go</div><div class="line">$ mv micro $GOBIN/</div><div class="line">$ micro --registry=etcdv3 list services</div></pre></td></tr></table></figure>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><h4 id="clone代码"><a href="#clone代码" class="headerlink" title="clone代码"></a>clone代码</h4><p>git clone git@github.com:weiwenwang/go-mcro-demo.git<br>cd go-micro-demo</p>
+<ul>
+<li>–selector=cache的作用是客户端(api,srv)在调服务器的时候,不用每次都去etcd拿数据,减轻注册中心的压力</li>
+<li>api1, api2, srv1, srv2是为了模拟多节点, 测试负债均衡<h4 id="启动Micro-Api"><a href="#启动Micro-Api" class="headerlink" title="启动Micro Api"></a>启动Micro Api</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">micro --selector=cache --registry=etcdv3 --registry_address=http://192.168.3.45:2479 api --handler=api</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>HTTP API Listening on [::]:8080  监听到本地8080端口</p>
+<h4 id="启动greeter-Api并注册到etcd"><a href="#启动greeter-Api并注册到etcd" class="headerlink" title="启动greeter Api并注册到etcd"></a>启动greeter Api并注册到etcd</h4><p>cd go-micro-demo/api1(启动第一个)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go run main.go --selector=cache --registry=etcdv3 --registry_address=http://192.168.3.45:2479</div></pre></td></tr></table></figure></p>
+<p>cd go-micro-demo/api2(启动第二个)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go run main.go --selector=cache --registry=etcdv3 --registry_address=http://192.168.3.45:2479</div></pre></td></tr></table></figure></p>
+<h4 id="启动greeter-srv并注册到etcd"><a href="#启动greeter-srv并注册到etcd" class="headerlink" title="启动greeter srv并注册到etcd"></a>启动greeter srv并注册到etcd</h4><p>cd go-micro-demo/srv/srv1(启动第一个)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go run main.go --selector=cache --registry=etcdv3 --registry_address=http://192.168.3.118:2379</div></pre></td></tr></table></figure></p>
+<p>cd go-micro-demo/srv/srv2(启动第二个)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go run main.go --selector=cache --registry=etcdv3 --registry_address=http://192.168.3.118:2379</div></pre></td></tr></table></figure></p>
+<h4 id="逻辑图"><a href="#逻辑图" class="headerlink" title="逻辑图"></a>逻辑图</h4><p>这个图是我借用<a href="http://btfak.com/%E5%BE%AE%E6%9C%8D%E5%8A%A1/2016/03/20/micro/" target="_blank" rel="external">别处</a>的, 图上的ip和我这不一致, 服务之间的调用完全一样</p>
+<p><a href="https://i.loli.net/2019/06/19/5d09fbb10b5c556537.png" target="_blank" rel="external"><img src="https://i.loli.net/2019/06/19/5d09fbb10b5c556537.png" alt="greeter.png"></a></p>
+<h3 id="查看etcdv3所有的key"><a href="#查看etcdv3所有的key" class="headerlink" title="查看etcdv3所有的key"></a>查看etcdv3所有的key</h3><p><a href="https://i.loli.net/2019/06/21/5d0ca52a667dd46348.png" target="_blank" rel="external"><img src="https://i.loli.net/2019/06/21/5d0ca52a667dd46348.png" alt="etcd-list.png"></a></p>
+<h3 id="浏览器访问Micro-Api"><a href="#浏览器访问Micro-Api" class="headerlink" title="浏览器访问Micro Api"></a>浏览器访问Micro Api</h3><p><a href="http://localhost:8080/greeter/say/hello?name=John" target="_blank" rel="external">http://localhost:8080/greeter/say/hello?name=John</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;api&quot;: &quot;api two&quot;,</div><div class="line">    &quot;message&quot;: &quot;Hello John srv one. rand:R&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#123;</div><div class="line">    &quot;api&quot;: &quot;api one&quot;,</div><div class="line">    &quot;message&quot;: &quot;Hello John srv one. rand:x&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#123;</div><div class="line">    &quot;api&quot;: &quot;api two&quot;,</div><div class="line">    &quot;message&quot;: &quot;Hello John srv two. rand:Y&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#123;</div><div class="line">    &quot;api&quot;: &quot;api one&quot;,</div><div class="line">    &quot;message&quot;: &quot;Hello John srv two. rand:a&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上四种结果随机返回</p>
+<h3 id="验证注册中心的ttl"><a href="#验证注册中心的ttl" class="headerlink" title="验证注册中心的ttl"></a>验证注册中心的ttl</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">thomasdeMacBook-Pro:~ www1$ etcdctl --endpoints=&quot;http://192.168.3.45:2379&quot; lease list</div><div class="line">found 2 leases</div><div class="line">05016b78d58c0234</div><div class="line">05016b78d58c0230</div><div class="line"></div><div class="line">thomasdeMacBook-Pro:~ www1$ etcdctl --endpoints=&quot;http://192.168.3.45:2379&quot; lease timetolive 05016b78d58c0230 --keys</div><div class="line">lease 05016b78d58c0230 granted with TTL(30s), remaining(27s), attached keys([/micro-registry/go.micro.srv.greeter/go.micro.srv.greeter-6382949a-92c6-46c9-b5c9-4cfbb8ce2420])</div><div class="line"></div><div class="line">thomasdeMacBook-Pro:~ www1$ etcdctl --endpoints=&quot;http://192.168.3.45:2379&quot; lease timetolive 05016b78d58c0230 --keys</div><div class="line">lease 05016b78d58c0230 granted with TTL(30s), remaining(21s), attached keys([/micro-registry/go.micro.srv.greeter/go.micro.srv.greeter-6382949a-92c6-46c9-b5c9-4cfbb8ce2420])</div><div class="line"></div><div class="line">thomasdeMacBook-Pro:~ www1$ etcdctl --endpoints=&quot;http://192.168.3.45:2379&quot; lease timetolive 05016b78d58c0230 --keys</div><div class="line">lease 05016b78d58c0230 granted with TTL(30s), remaining(29s), attached keys([/micro-registry/go.micro.srv.greeter/go.micro.srv.greeter-6382949a-92c6-46c9-b5c9-4cfbb8ce2420])</div></pre></td></tr></table></figure>
+<p>这里有两个lease ID, 选一个05016b78d58c0230, 可以看出是存的是srv, ttl是30,remaining小于20的时候就会重新变成30, 符合我们的代码设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">micro.RegisterTTL(time.Second*30),      // 这是设置注册到etcd那个key的过期时间</div><div class="line">micro.RegisterInterval(time.Second*10), // 这是服务去etcd报告自己还活着的周期</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微服务/" rel="tag"># 微服务</a>
+          
+            <a href="/tags/服务注册发现/" rel="tag"># 服务注册发现</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/28/NginxPhpDocker/" rel="next" title="NginxPhpDocker">
+                <i class="fa fa-chevron-left"></i> NginxPhpDocker
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">thomas</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动etcdv3集群"><span class="nav-number">1.</span> <span class="nav-text">启动etcdv3集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#node1"><span class="nav-number">1.1.</span> <span class="nav-text">node1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node2"><span class="nav-number">1.2.</span> <span class="nav-text">node2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node3"><span class="nav-number">1.3.</span> <span class="nav-text">node3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试etcd集群是否正常"><span class="nav-number">1.4.</span> <span class="nav-text">测试etcd集群是否正常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#micro安装etcd插件"><span class="nav-number">2.</span> <span class="nav-text">micro安装etcd插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动服务"><span class="nav-number">3.</span> <span class="nav-text">启动服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#clone代码"><span class="nav-number">3.1.</span> <span class="nav-text">clone代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动Micro-Api"><span class="nav-number">3.2.</span> <span class="nav-text">启动Micro Api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动greeter-Api并注册到etcd"><span class="nav-number">3.3.</span> <span class="nav-text">启动greeter Api并注册到etcd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动greeter-srv并注册到etcd"><span class="nav-number">3.4.</span> <span class="nav-text">启动greeter srv并注册到etcd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑图"><span class="nav-number">3.5.</span> <span class="nav-text">逻辑图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看etcdv3所有的key"><span class="nav-number">4.</span> <span class="nav-text">查看etcdv3所有的key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器访问Micro-Api"><span class="nav-number">5.</span> <span class="nav-text">浏览器访问Micro Api</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证注册中心的ttl"><span class="nav-number">6.</span> <span class="nav-text">验证注册中心的ttl</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">thomas</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
